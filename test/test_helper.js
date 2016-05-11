@@ -8,3 +8,4 @@ global.sinon = sinon;
 global.React = React;
 global.mount = mount;
 global.shallow = shallow;
+global.L = console.log;

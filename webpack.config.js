@@ -11,6 +11,9 @@ module.exports = {
     inline: true,
     port: 8888
   },
+  plugins: [
+    // new webpack.optimize.UglifyJsPlugin({})
+  ],
   module: {
     loaders: [
       {

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --content-base dist/",
     "build": "webpack",
     "test": "mocha --compilers js:babel-register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm test -- --watch"
@@ -35,6 +35,8 @@
   },
   "dependencies": {
     "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
   }
 }
