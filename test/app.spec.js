@@ -1,4 +1,4 @@
-import App from '../src/components/App';
+import App from '../src/containers/App';
 
 describe('<App/>', () => {
   it('renders h1', () => {
