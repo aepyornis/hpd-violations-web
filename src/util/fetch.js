@@ -14,7 +14,7 @@ export const geoclientFetch = (houseNumber, street, boro) => {
       borough: boro
     }
   });
-}
+};
 
 
 /**

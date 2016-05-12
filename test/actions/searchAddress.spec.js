@@ -2,8 +2,12 @@ import {
   geoclient,
   hasBBL,
   handleResult,
-  handleErr
+  handleErr,
+  searchAddress
 } from '../../src/actions/searchAddress';
+
+var fetch = require('../../src/util/fetch');
+
 
 describe.only('actions/searchAddress.js', ()=> {
   
@@ -29,8 +33,8 @@ describe.only('actions/searchAddress.js', ()=> {
 
     it('returns false if object does not have field "bbl"', ()=>{
       expect(hasBBL({'x': 1})).to.be.false;
-
     });
+
   });
 
   describe('handleResult', ()=>{
@@ -38,7 +42,6 @@ describe.only('actions/searchAddress.js', ()=> {
     it('dispatches DONE_FOUND ', ()=>{
       let dispatch = sinon.spy();
       let result = {'address': '123 Violation Road', bbl: '666'};
-      
       handleResult(dispatch, result);
       
       expect(dispatch.calledOnce).to.eql(true);
@@ -64,7 +67,7 @@ describe.only('actions/searchAddress.js', ()=> {
   });
 
   describe('handleErr', ()=>{
-    it('disaptches FAILED', ()=>{
+    it('dispatches FAILED', ()=>{
       let dispatch = sinon.spy();
       let err = new Error('OH MY GOD AN ERROR OCCURRED');
       handleErr(dispatch, err);
@@ -76,4 +79,41 @@ describe.only('actions/searchAddress.js', ()=> {
     });
   });
 
+  describe('searchAddress', ()=>{
+    const address = {
+      houseNumber: '123',
+      street: 'Main St.',
+      boro: 'Queens'
+    };
+
+    it('returns a function', ()=> expect(searchAddress(address)).to.be.instanceof(Function));
+    
+    describe('function returned by sarchAddress()', () =>{
+      let spy;
+      let calledThunk;
+      before( () => {
+        sinon.spy(fetch, 'geoclientFetch');
+        spy = sinon.spy();
+        calledThunk = searchAddress(address)(spy);
+      });
+      after( ()  => fetch.geoclientFetch.restore() );
+
+      it('dispatches IN PROGRESS when called', ()=>{
+        expect(spy.calledOnce).to.eql(true);
+        expect(spy.firstCall.args[0])
+          .to.eql({ type: 'GEOCLIENT', status: 'IN_PROGRESS', result: ''});
+      });
+
+      it('calls geoclientFetch with correct args', ()=>{
+        expect(fetch.geoclientFetch.calledOnce).to.eql(true);
+        expect(fetch.geoclientFetch.firstCall.args).to.eql(['123', 'Main St.', 'Queens']);
+      });
+
+      it('returns a promise', () => expect(calledThunk).to.be.a('promise'));
+
+    });
+    
+  });
+
 });
+
