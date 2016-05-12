@@ -1,12 +1,14 @@
 import React, { PropTypes} from 'react';
 
-const Display = ({address}) => (
-    <p>{address}</p>
-);
-
-Display.propTypes = { 
-   address: PropTypes.string.isRequired 
+const Display = ({address}) => {
+  let a = JSON.stringify(address);
+  return (
+      <p>{a}</p>
+  );
 };
 
-export default Display;
+// Display.propTypes = { 
+//    address: PropTypes.string.isRequired 
+// };
 
+export default Display;

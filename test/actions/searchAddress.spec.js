@@ -9,7 +9,7 @@ import {
 var fetch = require('../../src/util/fetch');
 
 
-describe.only('actions/searchAddress.js', ()=> {
+describe('actions/searchAddress.js', ()=> {
   
   describe('geoclient', () => {
 

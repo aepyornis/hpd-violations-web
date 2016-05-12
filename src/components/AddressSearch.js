@@ -1,19 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { submitAddress } from '../actions/actions';
+import { searchAddress } from '../actions/searchAddress';
 
-let AddressSearch = ({ dispatch }) => {
-  let input;
+export const AddressSearch = ({ dispatch }) => {
+  let houseNumber, street, boro;
+  
   return (
     <div>
-      <input ref={node => input = node} />
+      <input ref={node => houseNumber = node.value} />
+      <input ref={node => street = node.value} />
+      <select ref={node => boro = node.value}>
+        <option>Manhattan</option>
+        <option>Bronx</option>
+        <option>Brooklyn</option>
+        <option>Queens</option>
+        <option>Staten Island</option>
+      </select>
       <button onClick={() => {
-        dispatch(submitAddress(input.value));
+       
+        let address = {
+          houseNumber: houseNumber,
+          street: street,
+          boro: boro
+        };
+      dispatch(searchAddress(address));
       }}>Search</button>
     </div>
   );
-}
+};
 
-AddressSearch = connect()(AddressSearch);
-
-export default AddressSearch;
+export default connect()(AddressSearch);

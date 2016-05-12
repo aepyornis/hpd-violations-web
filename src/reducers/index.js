@@ -1,8 +1,6 @@
 //import { combineReducers } from 'redux';
 
-const defaultState = {
-  address: ''
-};
+const defaultState = {};
 
 export const reducer = (state = defaultState, action) => {
   switch(action.type) {
@@ -10,6 +8,15 @@ export const reducer = (state = defaultState, action) => {
       return Object.assign({}, state, {
         address: action.address
       });
+    case 'GEOCLIENT':
+      if (action.status === 'DONE_FOUND') {
+        return Object.assign({}, state, {
+          status: action.status,
+          result: action.result
+        });
+      } else {
+        return state;
+      }
     default:
       return state;
   }
