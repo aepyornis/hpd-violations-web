@@ -3,7 +3,7 @@ import axios from 'axios';
 import {geoclient} from '../config.js';
 
 
-describe.only('geoClientFetch', ()=>{
+describe('geoClientFetch', ()=>{
 
   before(() => sinon.spy(axios, 'get'));
   after(() => axios.get.restore());
