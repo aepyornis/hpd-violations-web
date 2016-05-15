@@ -8,7 +8,6 @@ import {
 
 var fetch = require('../../src/util/fetch');
 
-
 describe('actions/searchAddress.js', ()=> {
   
   describe('geoclient', () => {

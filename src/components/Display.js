@@ -1,7 +1,8 @@
-import React, { PropTypes} from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-const Display = ({address}) => {
-  let a = JSON.stringify(address);
+const Display = ({input}) => {
+  let a = JSON.stringify(input);
   return (
       <p>{a}</p>
   );
@@ -10,5 +11,8 @@ const Display = ({address}) => {
 // Display.propTypes = { 
 //    address: PropTypes.string.isRequired 
 // };
+
+
+
 
 export default Display;

@@ -4,7 +4,7 @@ import reducer from '../src/reducers/index';
 
 const actions = require('../src/actions/searchAddress');
 
-describe.only('<AddressSearch>', () =>{
+describe('<AddressSearch>', () =>{
   const store = createStore(reducer);
   let as; 
 
@@ -15,7 +15,7 @@ describe.only('<AddressSearch>', () =>{
       status: 'DONE_FOUND',
       result: {'data': 1000}
     });
-   });
+  });
 
   after(()=> actions.searchAddress.restore());
 
@@ -32,7 +32,7 @@ describe.only('<AddressSearch>', () =>{
     expect(store.getState())
       .to.eql({
         geoclient: { status: 'DONE_FOUND',result: {'data': 1000}},
-       violations: {}            
+        violations: {}            
      });
   });
   
