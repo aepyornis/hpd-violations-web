@@ -32,7 +32,7 @@ describe('violationsFetch', () =>{
       let correctUrl = violations.url + 'bbl/0123456789/all';
       violationsFetch('0123456789');
       expect(axios.get.calledWith(correctUrl)).to.be.true;
-     });
+    });
     
     it('sets "open" as param is default type ', ()=>{
       let correctUrl = violations.url + 'bbl/0123456789/open';

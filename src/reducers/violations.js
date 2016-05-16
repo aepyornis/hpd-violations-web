@@ -6,6 +6,8 @@ const reducer = (state = {}, action) => {
     return state;
   case 'VIOLATION_NOT_FOUND':
     return state;
+  case 'VIOLATION_NETWORK_ERROR':
+    return state;
   default:
     return state;
   };
