@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --content-base dist/",
-    "build": "webpack",
+    "build": "webpack && cp index.html dist/",
     "test": "mocha --compilers js:babel-register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm test -- --watch"
   },
