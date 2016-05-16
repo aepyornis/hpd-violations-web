@@ -26,12 +26,12 @@ describe('actions/searchAddress.js', ()=> {
 
   describe('hasBBL', ()=> {
 
-    it('returns true if object has field "bbl"', ()=>{
-      expect(hasBBL({'x': 1, 'bbl': '123'})).to.be.true;
+    it('returns true if object has field "bbl"nested below address', ()=>{
+      expect(hasBBL({address:{'x': 1, 'bbl': '123'}})).to.be.true;
     });
 
     it('returns false if object does not have field "bbl"', ()=>{
-      expect(hasBBL({'x': 1})).to.be.false;
+      expect(hasBBL({address:{'x': 1}})).to.be.false;
     });
 
   });
@@ -40,27 +40,27 @@ describe('actions/searchAddress.js', ()=> {
     
     it('dispatches DONE_FOUND ', ()=>{
       let dispatch = sinon.spy();
-      let result = {'address': '123 Violation Road', bbl: '666'};
+      let result = {address: {'address': '123 Violation Road', bbl: '666'}};
       handleResult(dispatch, result);
       
       expect(dispatch.calledOnce).to.eql(true);
       expect(dispatch.firstCall.args[0])
         .to.eql({ type: 'GEOCLIENT',
                   status: 'DONE_FOUND',
-                  result: { address: '123 Violation Road', bbl: '666' }});
+                  result: { address: { address: '123 Violation Road', bbl: '666' }}});
       
     });
 
     it('dispatches DONE_NOT_FOUND', ()=>{
       let dispatch = sinon.spy();
-      let result = {'message': 'ADDRESS NOT FOUND'};
+      let result = {address: {'message': 'ADDRESS NOT FOUND'}};
       handleResult(dispatch, result);
 
       expect(dispatch.calledOnce).to.eql(true);
       expect(dispatch.firstCall.args[0])
         .to.eql({ type: 'GEOCLIENT',
                   status: 'DONE_NOT_FOUND',
-                  result: {'message': 'ADDRESS NOT FOUND'}});
+                  result: {address: {'message': 'ADDRESS NOT FOUND'}}});
     });
     
   });
@@ -115,4 +115,3 @@ describe('actions/searchAddress.js', ()=> {
   });
 
 });
-

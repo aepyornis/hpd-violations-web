@@ -15,11 +15,11 @@ export const geoclient = (status, result = '') => {
 };
 
 /**
- * Determines if an object contains a string field bbl
+ * Determines if an object contains an address object with string field bbl
  * @param {object}
  * @returns {boolean}
  */
-export const hasBBL = obj => (typeof obj['bbl'] === 'string');
+export const hasBBL = obj => (typeof obj['address']['bbl'] === 'string');
 
 /**
  * extracts reason in string format for why the address search failed from the geoclient json response.
@@ -34,8 +34,8 @@ export const problemWithAddress = result => {};
  * @param {object} result
  */
 export const handleResult = (dispatch, result) => (hasBBL(result)) ? 
-  dispatch(geoclient('DONE_FOUND', result)) :
-  dispatch(geoclient('DONE_NOT_FOUND', result));
+    dispatch(geoclient('DONE_FOUND', result)) :
+    dispatch(geoclient('DONE_NOT_FOUND', result));
 
 /**
  * dispatches 'FAILED' in case of network error
@@ -54,6 +54,7 @@ export const searchAddress = (address) => {
   return (dispatch) => {
     dispatch(geoclient('IN_PROGRESS'));
     return geoclientFetch(address.houseNumber, address.street, address.boro)
+      .then(res => res.data )
       .then(res => handleResult(dispatch, res))
       .catch( err => handleErr(dispatch, err));
   };

@@ -27,11 +27,11 @@ describe('<AddressSearch>', () =>{
   });
 
   it('Dispatches Action - searchAddress -- when button is clicked', () =>{
-    expect(store.getState()).to.eql({violations: {}, geoclient: {}});
+    expect(store.getState()).to.eql({violations: {}, geoclient: { "type": "@@redux/INIT"}});
     as.find('button').simulate('click');
     expect(store.getState())
       .to.eql({
-        geoclient: { status: 'DONE_FOUND',result: {'data': 1000}},
+        geoclient: { status: 'DONE_FOUND',result: {'data': 1000}, type:"GEOCLIENT"},
         violations: {}            
      });
   });

@@ -1,9 +1,16 @@
 import App from '../src/containers/App';
+import AddressSearch from '../src/components/AddressSearch';
+import Info from '../src/containers/Info.js';
 
 describe('<App/>', () => {
-  it('renders h1', () => {
-    const app = shallow(<App/>);
-    expect(app.find('h1')).to.have.length(1);
+  let app;
+  before(() => app = shallow(<App/>));
+  
+  it('contains AddressSearch', () => {
+    expect(app.find(AddressSearch)).to.have.length(1);
+  });
+
+  it('contains Info', () => {
+    expect(app.find(Info)).to.have.length(1);
   });
 });
-

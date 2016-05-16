@@ -1,11 +1,15 @@
 import {get} from 'axios';
 import {geoclient} from '../../config.js';
 
-const API_URL = 'https://api.cityofnewyork.us/geoclient/v1/address.json';
-
-// number/str, str, str -> promise
+/**
+ * Fetches address information from the NYC geoclient API
+ * @param {str|number} houseNumber
+ * @param {str} street
+ * @param {str} boro
+ * @returns {promise} 
+ */
 export const geoclientFetch = (houseNumber, street, boro) => {
-  return get(API_URL, {
+  return get(geoclient.proxyurl, {
     params: {
       app_id: geoclient.appid,
       app_key: geoclient.appkey,
@@ -15,8 +19,3 @@ export const geoclientFetch = (houseNumber, street, boro) => {
     }
   });
 };
-
-
-/**
-https://api.cityofnewyork.us/geoclient/v1/address.json?app_id=f1c2a6e4&app_key=97086022e4ad2e532ebb07734d5b1ff0&houseNumber=199&street=Lee+Avenue&borough=Brooklyn"
-*/
