@@ -8,11 +8,4 @@ const Display = ({input}) => {
   );
 };
 
-// Display.propTypes = { 
-//    address: PropTypes.string.isRequired 
-// };
-
-
-
-
 export default Display;

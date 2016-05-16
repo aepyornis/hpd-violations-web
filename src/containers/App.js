@@ -1,6 +1,6 @@
 import React from 'react';
 import AddressSearch from '../components/AddressSearch';
-import Info from './Info';
+import InfoBoxes from './Info';
 
 
 /**
@@ -9,7 +9,7 @@ import Info from './Info';
 const App = () => (
   <div>
     <AddressSearch />
-    <Info />
+    <InfoBoxes />
   </div>
 );
 export default App;
