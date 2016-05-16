@@ -17,6 +17,9 @@ module.exports = {
     appid: 'your-nyc-developer-geoclient-app-id',
     appkey: 'your-nyc-developer-geoclient-appkey',
     proxyurl: 'geoclient proxy url'
+  },
+  violations: {
+    url: 'url-to-hpd-violations-server'
   }
 };
 

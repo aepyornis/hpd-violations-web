@@ -1,5 +1,5 @@
 import {get} from 'axios';
-import {geoclient} from '../../config.js';
+import {geoclient, violations} from '../../config.js';
 
 /**
  * Fetches address information from the NYC geoclient API
@@ -18,4 +18,14 @@ export const geoclientFetch = (houseNumber, street, boro) => {
       borough: boro
     }
   });
+};
+
+/**
+ * Fetches violations from HPD-violations-server
+ * @param {str} bbl
+ * @param {str} [type='all'] - 'all' or 'open'
+ * @returns {promise} 
+ */
+export const violationsFetch = (bbl, type = 'all') => {
+  return get(`${violations.url}bbl/${bbl}/${type}`);
 };
