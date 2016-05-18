@@ -8,7 +8,7 @@ import {
   NotFoundMessage,
   infoContentSwitcher,
   AddressInfoOrError
-} from '../src/components/AddressInfoOrError';
+} from '../../src/components/AddressInfoOrError';
 
 describe('components/AddressInfoOrError', () => {
   
