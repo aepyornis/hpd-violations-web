@@ -39,13 +39,13 @@ describe('<AddressSearch>', () =>{
     it('dispatches searchAddress action if boro is selected', ()=>{
       let spy = sinon.spy();
       onButtonClick(spy, {boro:'Brooklyn'});
-      expect(spy.firstCall.args[0]).to.eql(finalState.geoclient);
+      expect(spy.secondCall.args[0]).to.eql(finalState.geoclient);
     });
     
     it('dispatches ViolationsAction - INIT - if boro is selected', ()=>{
       let spy = sinon.spy();
       onButtonClick(spy, {boro:'Brooklyn'});
-      expect(spy.secondCall.args[0]).to.eql({type: 'VIOLATION', status: 'INIT', result: ""});
+      expect(spy.firstCall.args[0]).to.eql({type: 'VIOLATION', status: 'INIT', result: ""});
       expect(spy.calledTwice).to.eql(true);
     });
     
