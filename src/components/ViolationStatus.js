@@ -15,26 +15,32 @@ const statusText = (status) => {
   };
 };
 
-const hide = status => (status === 'VIOLATION_FOUND');
-
+/**
+ * Hides (returns true) if geoclientStatus is not 'DONE_FOUND' or 
+ * status is 'DONE_FOUND' and violations are 'VIOLATION_FOUND'
+ * @param {object} - props 
+ * @returns {Boolean} 
+ */
+export const hide = props => (props.geoclientStatus !== 'DONE_FOUND') || 
+  (props.violationStatus === 'VIOLATION_FOUND' && props.geoclientStatus === 'DONE_FOUND');
 
 /**
  * Displays status of Violation Search
  * @param {String} status
  * @returns {React.Component} 
  */
-export const ViolationStatus = ({status}) => (hide(status)) ? 
+export const ViolationStatus = (props) => (hide(props)) ? 
   <div></div> : 
   (<div className="row">
-        <h5>{statusText(status)}</h5>
+        <h5>{statusText(props.violationStatus)}</h5>
    </div>);
 
 
 const mapStateToProps = (state) => {
   return {
-    status: state.violations.status
+    violationStatus: state.violations.status,
+    geoclientStatus: state.geoclient.status
   };
 };
-
 
 export default connect(mapStateToProps)(ViolationStatus);
