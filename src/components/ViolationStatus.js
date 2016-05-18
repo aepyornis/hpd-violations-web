@@ -22,6 +22,7 @@ const statusText = (status) => {
  * @returns {Boolean} 
  */
 export const hide = props => (props.geoclientStatus !== 'DONE_FOUND') || 
+  (props.violationStatus === 'INIT') || 
   (props.violationStatus === 'VIOLATION_FOUND' && props.geoclientStatus === 'DONE_FOUND');
 
 /**
@@ -29,11 +30,22 @@ export const hide = props => (props.geoclientStatus !== 'DONE_FOUND') ||
  * @param {String} status
  * @returns {React.Component} 
  */
-export const ViolationStatus = (props) => (hide(props)) ? 
+export const ViolationStatus = (props) => hide(props) ? 
   <div></div> : 
   (<div className="row">
         <h5>{statusText(props.violationStatus)}</h5>
    </div>);
+
+// export const ViolationStatus = (props) => {
+//   if (props.geoclientStatus === 'DONE_FOUND') {
+    
+//   }
+
+// }hide(props) ? 
+//   <div></div> : 
+//   (<div className="row">
+//         <h5>{statusText(props.violationStatus)}</h5>
+//    </div>);
 
 
 const mapStateToProps = (state) => {

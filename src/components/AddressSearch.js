@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { searchAddress, forgotToSelectBoro } from '../actions/searchAddress';
+import { violationsAction } from '../actions/getViolations';
 import { addressSearchSelect } from '../style';
 
 /**
@@ -8,10 +9,15 @@ import { addressSearchSelect } from '../style';
  * @param {function} dispatch
  * @param {object} Address
  */
-export const onButtonClick = (dispatch, address) => (address.boro === 'X') ? 
-  dispatch(forgotToSelectBoro()) :
-  dispatch(searchAddress(address));
-
+export const onButtonClick = (dispatch, address) => {
+  if (address.boro === 'X' || address.boro === '') {
+    dispatch(forgotToSelectBoro());
+  } else {
+    dispatch(searchAddress(address));
+    dispatch(violationsAction('INIT'));
+  }
+};
+    
 export const AddressSearch = ({ dispatch}) => {
   const defaultVal = {value: ''};
   let houseNumber = defaultVal;
@@ -22,7 +28,7 @@ export const AddressSearch = ({ dispatch}) => {
     <div>
       <input id="houseNumberInput" 
              ref={node => houseNumber = node} 
-             class="form-input" />
+             className="form-input" />
         <input ref={node => street = node}  
                className="form-input" />
           

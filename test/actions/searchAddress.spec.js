@@ -93,7 +93,7 @@ describe('actions/searchAddress.js', ()=> {
 
     it('returns a function', ()=> expect(searchAddress(address)).to.be.instanceof(Function));
     
-    describe('function returned by sarchAddress()', () =>{
+    describe('function returned by searchAddress()', () =>{
       let spy;
       let calledThunk;
       before( () => {

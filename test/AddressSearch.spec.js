@@ -1,20 +1,15 @@
 import {AddressSearch, onButtonClick} from '../src/components/AddressSearch';
-import {createStore} from  'redux';
 import reducer from '../src/reducers/index';
 
 const actions = require('../src/actions/searchAddress');
 
-
 describe('<AddressSearch>', () =>{
-  const store = createStore(reducer);
-  let as; 
   let finalState = {
     geoclient: { status: 'DONE_FOUND',result: {'data': 1000}, type: "GEOCLIENT"},
-    violations: {}            
+    violations: {status: 'INIT'}            
   };
   
   before(()=> {
-    as = shallow(<AddressSearch dispatch={store.dispatch}/>);
     sinon.stub(actions, 'searchAddress').returns({
       type: 'GEOCLIENT',
       status: 'DONE_FOUND',
@@ -24,22 +19,19 @@ describe('<AddressSearch>', () =>{
 
   after(()=> actions.searchAddress.restore());
 
-  it('contains 2 inputs, 1 select, 5 optios, and 1 button', ()=>{
+  it('Contains 2 inputs, 1 select, 6 options, and 1 button', ()=>{
+    let as = shallow(<AddressSearch/>);
     expect(as.find('input')).to.have.length(2);
     expect(as.find('select')).to.have.length(1);
     expect(as.find('button')).to.have.length(1);
     expect(as.find('option')).to.have.length(6);
   });
 
-  it('Dispatches Action - searchAddress -- when button is clicked', () =>{
-    expect(store.getState()).to.eql({violations: {}, geoclient: {
-      status: 'INIT',
-      result: {
-        address: {}
-      }
-    }});
-    as.find('button').simulate('click');
-    expect(store.getState()).to.eql(finalState);
+  it('Dispatches action when button is clicked', () =>{
+    let spy = sinon.spy();
+    let AddSearch = shallow(<AddressSearch dispatch={spy}/>); 
+    AddSearch.find('button').simulate('click');
+    expect(spy.calledOnce).to.eql(true);
   });
 
   describe('onButtonClick', ()=>{
@@ -48,6 +40,13 @@ describe('<AddressSearch>', () =>{
       let spy = sinon.spy();
       onButtonClick(spy, {boro:'Brooklyn'});
       expect(spy.firstCall.args[0]).to.eql(finalState.geoclient);
+    });
+    
+    it('dispatches ViolationsAction - INIT - if boro is selected', ()=>{
+      let spy = sinon.spy();
+      onButtonClick(spy, {boro:'Brooklyn'});
+      expect(spy.secondCall.args[0]).to.eql({type: 'VIOLATION', status: 'INIT', result: ""});
+      expect(spy.calledTwice).to.eql(true);
     });
     
     it('dispatches forgotToSelectBoro action if boro is not selected', ()=>{
