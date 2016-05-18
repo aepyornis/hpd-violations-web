@@ -65,6 +65,14 @@ describe('components/AddressInfoOrError', () => {
   });
   
   describe('infoContentSwitcher()', ()=> {
+    
+    it('returns <SimpleMessage /> for INIT', () => {
+      expect(isElementOfType(infoContentSwitcher('INIT', {}), SimpleMessage))
+        .to.eql(true);
+      expect(shallow(infoContentSwitcher('INIT', {})).text())
+        .to.eql('Type in an address to search!');
+    });
+    
     it('returns <SimpleMessage /> for IN PROGRESS & FAILED', ()=>{
       expect(isElementOfType(infoContentSwitcher('IN_PROGRESS', {}),SimpleMessage))
         .to.eql(true);

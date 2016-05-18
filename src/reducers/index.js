@@ -1,11 +1,25 @@
-import { combineReducers } from 'redux';
-import geoclientReducer from './geoclient';
-import violationsReducer from './violations';
+//import { combineReducers } from 'redux';
 
-const defaultState = {};
+const defaultState = {
+  violations: {},
+  geoclient: {
+    status: 'INIT',
+    result: {
+      address: {}
+    }
+  }
+};
 
-export default combineReducers({
-  geoclient: geoclientReducer,
-  violations: violationsReducer
-});
 
+export const reducer = (state = defaultState, action) => {
+  switch (action.type) {
+  case 'VIOLATION':
+    return state;
+  case 'GEOCLIENT':
+    return Object.assign({}, state, {geoclient: action});
+  default:
+    return state;
+  };
+};
+
+export default reducer;

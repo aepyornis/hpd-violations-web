@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { isUndefined } from 'lodash';
 
 export const orEmptyString = (x) => isUndefined(x) ? '' : x;
+export const orEmptyObj = (x) => isUndefined(x) ? '' : {};
 
 /**
  * Creates an Address string from fields: houseNumber, firstStreetNameNormalized, zipCode
@@ -46,6 +47,8 @@ export const NotFoundMessage = ({address}) => {
  */
 export const infoContentSwitcher = (status, address) => {
   switch(status) {
+  case 'INIT':
+    return <SimpleMessage text="Type in an address to search!" />;
   case 'IN_PROGRESS':
     return <SimpleMessage text="Searching the address..." />;
   case 'DONE_FOUND':
@@ -67,7 +70,7 @@ export const infoContentSwitcher = (status, address) => {
 const mapStateToProps = (state) => {
   return {
     status: state.geoclient.status,
-    address: state.geoclient.result.address
+    address: orEmptyObj(state.geoclient.result.address)
   };
 };
 
@@ -92,5 +95,7 @@ AddressInfoOrError.propTypes = {
   status: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps)(AddressInfoOrError);
+AddressInfoOrError.getDefaultProps = () => ({address: {}})
 
+
+export default connect(mapStateToProps)(AddressInfoOrError);
