@@ -24,3 +24,7 @@ navbar.text = {
   fontSize: '18px',
   paddingLeft: '20px'
 };
+
+export const addressSearchSelect = {
+  maxWidth: '100px'
+};
