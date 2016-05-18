@@ -3,7 +3,8 @@ import {
   hasBBL,
   handleResult,
   handleErr,
-  searchAddress
+  searchAddress,
+  forgotToSelectBoro
 } from '../../src/actions/searchAddress';
 
 var fetch = require('../../src/util/fetch');
@@ -17,9 +18,9 @@ describe('actions/searchAddress.js', ()=> {
       expect(g).to.eql({status: 'MY_STATUS', type: 'GEOCLIENT', result: {'data': 123}});
     });
 
-    it('result field defaults to blank string', ()=>{
+    it('result field defaults to empty obj', ()=>{
       let g = geoclient('IN_PROGRESS');
-      expect(g.result).to.eql('');
+      expect(g.result).to.eql({});
     });
 
   });
@@ -33,6 +34,11 @@ describe('actions/searchAddress.js', ()=> {
     it('returns false if object does not have field "bbl"', ()=>{
       expect(hasBBL({address:{'x': 1}})).to.be.false;
     });
+
+  });
+
+  describe('forgotToSelectBoro', () =>{
+    it('returns FORGOT_TO_SELECT_BORO geoclient action', ()=> expect(forgotToSelectBoro().status).to.eql('FORGOT_TO_SELECT_BORO'));
 
   });
 
@@ -100,7 +106,7 @@ describe('actions/searchAddress.js', ()=> {
       it('dispatches IN PROGRESS when called', ()=>{
         expect(spy.calledOnce).to.eql(true);
         expect(spy.firstCall.args[0])
-          .to.eql({ type: 'GEOCLIENT', status: 'IN_PROGRESS', result: ''});
+          .to.eql({ type: 'GEOCLIENT', status: 'IN_PROGRESS', result: {}});
       });
 
       it('calls geoclientFetch with correct args', ()=>{

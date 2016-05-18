@@ -50,6 +50,8 @@ export const infoContentSwitcher = (status, address) => {
   switch(status) {
   case 'INIT':
     return <SimpleMessage text="Type in an address to search!" />;
+  case 'FORGOT_TO_SELECT_BORO':
+    return <SimpleMessage text="Don't forget to select the Borough" />;
   case 'IN_PROGRESS':
     return <SimpleMessage text="Searching the address..." />;
   case 'DONE_FOUND':

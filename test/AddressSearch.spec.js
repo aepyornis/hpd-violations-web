@@ -1,13 +1,18 @@
-import {AddressSearch} from '../src/components/AddressSearch';
+import {AddressSearch, onButtonClick} from '../src/components/AddressSearch';
 import {createStore} from  'redux';
 import reducer from '../src/reducers/index';
 
 const actions = require('../src/actions/searchAddress');
 
+
 describe('<AddressSearch>', () =>{
   const store = createStore(reducer);
   let as; 
-
+  let finalState = {
+    geoclient: { status: 'DONE_FOUND',result: {'data': 1000}, type: "GEOCLIENT"},
+    violations: {}            
+  };
+  
   before(()=> {
     as = shallow(<AddressSearch dispatch={store.dispatch}/>);
     sinon.stub(actions, 'searchAddress').returns({
@@ -34,11 +39,23 @@ describe('<AddressSearch>', () =>{
       }
     }});
     as.find('button').simulate('click');
-    expect(store.getState())
-      .to.eql({
-        geoclient: { status: 'DONE_FOUND',result: {'data': 1000}, type: "GEOCLIENT"},
-        violations: {}            
-     });
+    expect(store.getState()).to.eql(finalState);
+  });
+
+  describe('onButtonClick', ()=>{
+    
+    it('dispatches searchAddress action if boro is selected', ()=>{
+      let spy = sinon.spy();
+      onButtonClick(spy, {boro:'Brooklyn'});
+      expect(spy.firstCall.args[0]).to.eql(finalState.geoclient);
+    });
+    
+    it('dispatches forgotToSelectBoro action if boro is not selected', ()=>{
+      let spy = sinon.spy();
+      onButtonClick(spy, {boro:'X'});
+      expect(spy.firstCall.args[0].status).to.eql('FORGOT_TO_SELECT_BORO');
+    });
+
   });
   
 });

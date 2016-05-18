@@ -81,6 +81,13 @@ describe('components/AddressInfoOrError', () => {
         .to.eql('Type in an address to search!');
     });
     
+    it('returns <SimpleMessage /> for FORGOT TO SELECT BORO', () => {
+      expect(isElementOfType(infoContentSwitcher('FORGOT_TO_SELECT_BORO', {}), SimpleMessage))
+        .to.eql(true);
+      expect(shallow(infoContentSwitcher('FORGOT_TO_SELECT_BORO', {})).text())
+        .to.eql("Don't forget to select the Borough");
+    });
+    
     it('returns <SimpleMessage /> for IN PROGRESS & FAILED', ()=>{
       expect(isElementOfType(infoContentSwitcher('IN_PROGRESS', {}),SimpleMessage))
         .to.eql(true);

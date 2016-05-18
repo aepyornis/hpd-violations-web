@@ -6,7 +6,7 @@ import {geoclientFetch} from '../util/fetch';
  * @param {string|object} result
  * @returns {object} 
  */
-export const geoclient = (status, result = '') => {
+export const geoclient = (status, result = {}) => {
   return {
     type: 'GEOCLIENT',
     status: status,
@@ -22,11 +22,10 @@ export const geoclient = (status, result = '') => {
 export const hasBBL = obj => (typeof obj['address']['bbl'] === 'string');
 
 /**
- * extracts reason in string format for why the address search failed from the geoclient json response.
- * @param {object}
- * @returns {string}
+ * 
+ * @returns {object}
  */
-export const problemWithAddress = result => {};
+export const forgotToSelectBoro = () => geoclient('FORGOT_TO_SELECT_BORO');
 
 /**
  * Dispatches 'DONE_FOUND' if the search worked or 'DONE_NOT_FOUND' if it  was not successful.
@@ -59,3 +58,4 @@ export const searchAddress = (address) => {
       .catch( err => handleErr(dispatch, err));
   };
 };
+
