@@ -3,7 +3,7 @@ import {
   ViolationList
 } from '../../src/components/ViolationList';
 
-describe.only('ViolationList.js', ()=>{
+describe('ViolationList.js', ()=>{
   describe('<ViolationItem />', ()=>{
     it('renders <li> tag', ()=>{
       let component = shallow(<ViolationItem violationclass="B" currentstatus="open" />);
