@@ -1,7 +1,9 @@
 //import { combineReducers } from 'redux';
 
 const defaultState = {
-  violations: {},
+  violations: {
+    status: 'INIT'
+  },
   geoclient: {
     status: 'INIT',
     result: {
@@ -14,7 +16,7 @@ const defaultState = {
 export const reducer = (state = defaultState, action) => {
   switch (action.type) {
   case 'VIOLATION':
-    return state;
+    return Object.assign({}, state, {violations: action});
   case 'GEOCLIENT':
     return Object.assign({}, state, {geoclient: action});
   default:

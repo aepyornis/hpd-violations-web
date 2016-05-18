@@ -1,7 +1,6 @@
 import React from 'react';
 import {navbar} from '../style';
 
-
 const NavBar = () => (
   <div style={navbar.container}>
     <div style={navbar.infoMenuButton}>

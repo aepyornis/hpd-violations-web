@@ -9,7 +9,8 @@ import {has} from 'lodash';
  */
 export const violationsAction = (status, result = '') => {
   return {
-    type: status,
+    type: "VIOLATION",
+    status: status,
     result: result
   };
 };
@@ -37,6 +38,7 @@ export const handleResult = (dispatch, res) => {
 export const handleErr = (dispatch, err) => dispatch(violationsAction('VIOLATION_NETWORK_ERROR', err));
 
 /**
+ * Get Violations 'Thunk'
  * 
  * @param {String} bbl
  * @returns {} 

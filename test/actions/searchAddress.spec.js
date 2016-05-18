@@ -8,8 +8,10 @@ import {
 } from '../../src/actions/searchAddress';
 
 var fetch = require('../../src/util/fetch');
+var violationAction = require('../../src/actions/getViolations');
 
 describe('actions/searchAddress.js', ()=> {
+  let result = {address: {'address': '123 Violation Road', bbl: '666'}};
   
   describe('geoclient', () => {
 
@@ -46,15 +48,26 @@ describe('actions/searchAddress.js', ()=> {
     
     it('dispatches DONE_FOUND ', ()=>{
       let dispatch = sinon.spy();
-      let result = {address: {'address': '123 Violation Road', bbl: '666'}};
       handleResult(dispatch, result);
       
-      expect(dispatch.calledOnce).to.eql(true);
+      expect(dispatch.calledTwice).to.eql(true);
       expect(dispatch.firstCall.args[0])
         .to.eql({ type: 'GEOCLIENT',
                   status: 'DONE_FOUND',
                   result: { address: { address: '123 Violation Road', bbl: '666' }}});
+    });
+
+    it('dispatches getViolations Thunk', ()=>{
+      sinon.spy(violationAction, 'getViolations');
+      let dispatch = sinon.spy();
       
+      handleResult(dispatch, result);
+      
+      expect(dispatch.calledTwice).to.eql(true);
+      expect(violationAction.getViolations.calledOnce).to.eql(true);
+      expect(violationAction.getViolations.firstCall.args[0]).to.eql('666');
+      
+      violationAction.getViolations.restore();
     });
 
     it('dispatches DONE_NOT_FOUND', ()=>{

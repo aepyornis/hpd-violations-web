@@ -1,7 +1,9 @@
 import React from 'react';
-import AddressSearch from '../containers/AddressSearch';
+import AddressSearch from '../components/AddressSearch';
 import NavBar from '../components/NavBar';
 import AddressInfoOrError from '../components/AddressInfoOrError';
+import ViolationStatus from '../components/ViolationStatus';
+import Info from './Info';
 
 /**
  * App container
@@ -12,6 +14,8 @@ const App = () => (
     <div className="grid">
       <AddressSearch />
       <AddressInfoOrError />
+      <ViolationStatus />
+      <Info />
     </div>
   </div>
 );

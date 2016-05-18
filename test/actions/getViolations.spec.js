@@ -12,7 +12,8 @@ describe('actions/getViolations', ()=>{
   describe('violationsAction()', ()=>{
     it('returns object with type and result', ()=>{
       expect(violationsAction('GET', 'data')).to.eql({
-        type: 'GET',
+        type:"VIOLATION",
+        status: 'GET',
         result: 'data'
     });
   });
@@ -27,7 +28,8 @@ describe('actions/getViolations', ()=>{
       expect(dispatchSpy.calledOnce).to.eql(true);
       expect(dispatchSpy.firstCall.args[0])
         .to.eql({
-          type:'VIOLATION_NOT_FOUND',
+          type:"VIOLATION",
+          status:'VIOLATION_NOT_FOUND',
           result: res
         });
     });
@@ -38,7 +40,8 @@ describe('actions/getViolations', ()=>{
       expect(dispatchSpy.calledOnce).to.eql(true);
       expect(dispatchSpy.firstCall.args[0])
         .to.eql({
-          type:'VIOLATION_FOUND',
+          type: "VIOLATION",
+          status:'VIOLATION_FOUND',
           result: res
         });
     });
@@ -52,7 +55,8 @@ describe('actions/getViolations', ()=>{
       expect(dispatchSpy.calledOnce).to.eql(true);
       expect(dispatchSpy.firstCall.args[0])
         .to.eql({
-          type:'VIOLATION_NETWORK_ERROR',
+          type: "VIOLATION",
+          status:'VIOLATION_NETWORK_ERROR',
           result: error
         });
 
@@ -77,7 +81,7 @@ describe('actions/getViolations', ()=>{
       it('dispatches VIOLATION IN PROGRESS', ()=>{
         expect(spy.calledOnce).to.eql(true);
         expect(spy.firstCall.args[0])
-          .to.eql({ type: 'VIOLATION_IN_PROGRESS', result: ''});
+          .to.eql({ type: "VIOLATION", status: 'VIOLATION_IN_PROGRESS', result: ''});
       });
       it('returns a promise', () => expect(calledThunk).to.be.a('promise'));
     });

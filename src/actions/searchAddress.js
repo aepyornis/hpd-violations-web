@@ -1,4 +1,5 @@
 import {geoclientFetch} from '../util/fetch';
+import {getViolations} from './getViolations';
 
 /**
  * geoclient redux action
@@ -32,9 +33,14 @@ export const forgotToSelectBoro = () => geoclient('FORGOT_TO_SELECT_BORO');
  * @param {function} dispatch
  * @param {object} result
  */
-export const handleResult = (dispatch, result) => (hasBBL(result)) ? 
-    dispatch(geoclient('DONE_FOUND', result)) :
+export const handleResult = (dispatch, result) => {
+  if (hasBBL(result)) {
+    dispatch(geoclient('DONE_FOUND', result));
+    dispatch(getViolations(result.address.bbl));
+  } else {
     dispatch(geoclient('DONE_NOT_FOUND', result));
+  }
+};
 
 /**
  * dispatches 'FAILED' in case of network error

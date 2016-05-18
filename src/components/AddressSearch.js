@@ -13,8 +13,8 @@ export const onButtonClick = (dispatch, address) => {
   if (address.boro === 'X' || address.boro === '') {
     dispatch(forgotToSelectBoro());
   } else {
-    dispatch(searchAddress(address));
     dispatch(violationsAction('INIT'));
+    dispatch(searchAddress(address));
   }
 };
     
