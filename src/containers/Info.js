@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Display from '../components/Display';
-import AddressInfo from '../components/AddressInfo';
+import AddressInfo from '../components/AddressInfoOrError';
 import {isUndefined} from 'lodash';
 
 const exists = x => !isUndefined(x);
