@@ -33,12 +33,20 @@ describe('components/AddressInfoOrError', () => {
   
   describe('<AddressInfo />', ()=>{
     let addressInfo;
-    before(()=> addressInfo = shallow(<AddressInfo address="A" bbl="123" />));
+    let a = {
+      houseNumber: '12',
+      firstStreetNameNormalized: 'Main',
+      zipCode: '12345',
+      bbl: '123'
+    };
+    before(()=> {
+      addressInfo = shallow(<AddressInfo address={a} />);
+    });
     
     it('Contains two <p> tags', ()=> expect(addressInfo.find('p')).to.have.length(2));
 
     it('contains correct text', ()=>{
-      expect(addressInfo.childAt(0).text()).to.eql('A');
+      expect(addressInfo.childAt(0).text()).to.eql('12 Main, 12345');
       expect(addressInfo.childAt(1).text()).to.eql('BBL: 123');
     });
     

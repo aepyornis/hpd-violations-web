@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { isUndefined } from 'lodash';
 
 export const orEmptyString = (x) => isUndefined(x) ? '' : x;
-export const orEmptyObj = (x) => isUndefined(x) ? '' : {};
 
 /**
  * Creates an Address string from fields: houseNumber, firstStreetNameNormalized, zipCode
@@ -15,12 +14,14 @@ export const formatAddress = a => `${a.houseNumber} ${a.firstStreetNameNormalize
 /**
  * Show when status is DONE_FOUND
  */
-export const AddressInfo = ({address, bbl}) => (
+export const AddressInfo = ({address}) => {
+  return (
      <div>
-        <p><strong>{address}</strong></p>
-        <p><strong>BBL: </strong>{bbl}</p>
+        <p><strong>{formatAddress(address)}</strong></p>
+        <p><strong>BBL: </strong>{address.bbl}</p>
       </div>
-);
+  );
+};
 
 /**
  * Show when status is IN_PROGRESS / FAILED
@@ -52,7 +53,7 @@ export const infoContentSwitcher = (status, address) => {
   case 'IN_PROGRESS':
     return <SimpleMessage text="Searching the address..." />;
   case 'DONE_FOUND':
-    return <AddressInfo address={formatAddress(address)} bbl={address.bbl}/>;
+    return <AddressInfo address={address} />;
   case 'DONE_NOT_FOUND':
     return  <NotFoundMessage address={address} />;
   case 'FAILED':
@@ -70,7 +71,7 @@ export const infoContentSwitcher = (status, address) => {
 const mapStateToProps = (state) => {
   return {
     status: state.geoclient.status,
-    address: orEmptyObj(state.geoclient.result.address)
+    address: state.geoclient.result.address
   };
 };
 
@@ -82,7 +83,8 @@ const mapStateToProps = (state) => {
  */
 export const AddressInfoOrError = ({status, address}) => (
     <div className="row">
-      <div className="col-4"></div>
+      <div className="col-4">
+    </div>
       <div className="col-4" id="info-container">
          {infoContentSwitcher(status, address)}
        </div>
@@ -94,8 +96,7 @@ AddressInfoOrError.propTypes = {
   address: PropTypes.object,
   status: PropTypes.string.isRequired
 };
-
-AddressInfoOrError.getDefaultProps = () => ({address: {}})
+AddressInfoOrError.defaultProps = () => ({address: {}});
 
 
 export default connect(mapStateToProps)(AddressInfoOrError);
