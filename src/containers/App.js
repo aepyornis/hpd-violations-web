@@ -3,6 +3,7 @@ import AddressSearch from '../components/AddressSearch';
 import NavBar from '../components/NavBar';
 import AddressInfoOrError from '../components/AddressInfoOrError';
 import ViolationStatus from '../components/ViolationStatus';
+import Violations from './Violations';
 import Info from './Info';
 
 /**
@@ -15,6 +16,7 @@ const App = () => (
       <AddressSearch />
       <AddressInfoOrError />
       <ViolationStatus />
+      <Violations />
       <Info />
     </div>
   </div>

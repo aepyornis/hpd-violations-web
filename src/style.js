@@ -28,3 +28,12 @@ navbar.text = {
 export const addressSearchSelect = {
   maxWidth: '100px'
 };
+
+export const violationSquare = {
+  display: 'inline-block',
+  marginLeft: '3em',
+  marginTop: '1em',
+  width: '80px',
+  height: '100px',
+  lineHeight: '80px'
+};
