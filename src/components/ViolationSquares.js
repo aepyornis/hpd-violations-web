@@ -3,7 +3,7 @@ import {ViolationSquare } from './ViolationSquare';
 import {filter, toString, isUndefined} from 'lodash';
 
 /**
- * Turns a list of Violations in to an array of props for ViolationSquare 
+ * Turns a list of Violations into an array of props used by ViolationSquare 
  * @param {Array} violations
  * @returns {Array} 
  */
@@ -26,6 +26,3 @@ export const ViolationSquares = ({violations}) => (
 ViolationSquares.propTypes = {
   violations: PropTypes.array.isRequired
 };
-
-
-

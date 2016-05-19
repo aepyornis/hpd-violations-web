@@ -20,14 +20,15 @@ const colorPicker = (violationclass) => {
 const colorPickerStyle = (violationclass) => ({backgroundColor: colorPicker(violationclass)});
 
 /**
- * Square to hold  
+ * Display of violation class and count
  * @param {String} violationclass
  * @param {String|Int} count
+ * @param {Function} onClick 
  */
-export const ViolationSquare = ({violationclass, count}) => {
+export const ViolationSquare = ({violationclass, count, onClick}) => {
   const style = Object.assign({},violationSquare.container,colorPickerStyle(violationclass));
    return (
-    <div style={style} >
+       <div style={style} onClick={ () => onClick(violationclass) }>
        <h3 style={violationSquare.h3}>{violationclass}</h3>
        <h3 style={violationSquare.h3}>{count}</h3>
   </div>
@@ -36,7 +37,8 @@ export const ViolationSquare = ({violationclass, count}) => {
 
 ViolationSquare.propTypes = {
   violationclass: PropTypes.string,
-  count: PropTypes.string
+  count: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 
