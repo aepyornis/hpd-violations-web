@@ -1,4 +1,5 @@
 //import { combineReducers } from 'redux';
+import {reject} from 'lodash';
 
 const defaultState = {
   violations: {
@@ -9,8 +10,24 @@ const defaultState = {
     result: {
       address: {}
     }
-  }
+  },
+  violationClassFilter: []
 };
+
+
+
+export const addOrRemove = (arr ,item) => arr.includes(item) ? 
+  reject(arr, (i) => i === item) :
+  arr.concat(item);
+
+
+/**
+ * updates violationClassFilterArray
+ * @param {} state
+ * @param {} action
+ */
+export const violationClick = (state, action) => Object.assign({},state, 
+    {violationClassFilter: addOrRemove(state.violationClassFilter, action.violationClassFilter)});
 
 
 export const reducer = (state = defaultState, action) => {
@@ -19,6 +36,8 @@ export const reducer = (state = defaultState, action) => {
     return Object.assign({}, state, {violations: action});
   case 'GEOCLIENT':
     return Object.assign({}, state, {geoclient: action});
+  case 'VIOLATION_CLICK':
+    return violationClick(state, action);
   default:
     return state;
   };
