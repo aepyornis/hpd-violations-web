@@ -17,7 +17,6 @@ const App = () => (
       <AddressInfoOrError />
       <ViolationStatus />
       <Violations />
-      <Info />
     </div>
   </div>
 );

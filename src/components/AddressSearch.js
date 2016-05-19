@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { searchAddress, forgotToSelectBoro } from '../actions/searchAddress';
 import { violationsAction } from '../actions/getViolations';
-import { addressSearchSelect } from '../style';
+import { addressSearch } from '../style';
 
 /**
  * Dispatches Actions when Button is clicked.
@@ -25,7 +25,7 @@ export const AddressSearch = ({ dispatch}) => {
   let boro = defaultVal;
   
   return (
-    <div>
+      <div style={addressSearch.container}>
       <input id="houseNumberInput" 
              ref={node => houseNumber = node} 
              className="form-input" />
@@ -34,7 +34,7 @@ export const AddressSearch = ({ dispatch}) => {
           
         <select ref={node => boro = node} 
             className="form-select" 
-            style={addressSearchSelect} >
+            style={addressSearch.select} >
           
             <option value='X'>Borough:</option>
             <option value="Manhattan">Manhattan</option>

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { isUndefined } from 'lodash';
+import {addressInfo} from '../style';
 
 export const orEmptyString = (x) => isUndefined(x) ? '' : x;
 
@@ -71,8 +72,10 @@ export const infoContentSwitcher = (status, address) => {
  * @returns {object} 
  */
 const mapStateToProps = (state) => {
+  let s = state.geoclient.status;
   return {
     status: state.geoclient.status,
+    error: (s === 'DONE_NOT_FOUND' || s === 'FAILED' || s === 'FORGOT_TO_SELECT_BORO'),
     address: state.geoclient.result.address
   };
 };
@@ -82,21 +85,25 @@ const mapStateToProps = (state) => {
  * Displays Message or Information in box according the search address status.
  * @param {String} status
  * @param {Object} address
+ * @param {Boolean} error
  */
-export const AddressInfoOrError = ({status, address}) => (
+export const AddressInfoOrError = ({status, address, error}) => {
+  let divClasses = `col-4 alert ${ (error) ? 'alert-error' : ''}`;
+  return (
     <div className="row">
-      <div className="col-4">
-    </div>
-      <div className="col-4" id="info-container">
+      <div className="col-4"></div>
+      <div className={divClasses} id="info-container" style={addressInfo}>
          {infoContentSwitcher(status, address)}
        </div>
        <div className="col-4"></div>
     </div>
-);
+  );
+};
 
 AddressInfoOrError.propTypes = {
   address: PropTypes.object,
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
+  error: PropTypes.bool
 };
 AddressInfoOrError.defaultProps = () => ({address: {}});
 

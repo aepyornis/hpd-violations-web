@@ -20,20 +20,45 @@ navbar.icon = {
 };
 
 navbar.text = {
-  color: 'black',
+  color: 'black', 
   fontSize: '18px',
   paddingLeft: '20px'
 };
 
-export const addressSearchSelect = {
-  maxWidth: '100px'
+export const addressSearch = {
+  select: {
+    maxWidth: '100px'
+  },
+  container: {
+    textAlign: 'center'
+  }
 };
 
 export const violationSquare = {
-  display: 'inline-block',
-  marginLeft: '3em',
-  marginTop: '1em',
-  width: '80px',
-  height: '100px',
-  lineHeight: '80px'
+  container: {
+    display: 'inline-block',
+    marginLeft: '3em',
+    marginTop: '1em',
+    width: '80px',
+    height: '100px',
+    lineHeight: '80px',
+    outlineWidth: '1px',
+    outlineColor: 'black',
+    outlineStyle: 'dashed'
+  },
+  h3: {
+    color: 'black'
+  }
 };
+
+
+export const addressInfo = {
+  textAlign: 'center'
+};
+
+export const violations = {
+  container: {
+    textAlign: 'center'
+  }
+};
+
