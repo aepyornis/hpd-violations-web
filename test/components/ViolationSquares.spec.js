@@ -1,10 +1,31 @@
 import {isElementOfType} from 'react-addons-test-utils';
-import {squareProps, ViolationSquares} from '../../src/components/ViolationSquares';
-import {ViolationSquare }from '../../src/components/ViolationSquare';
+import {
+  squareProps, 
+  ViolationSquares, 
+  wrapDispatchWithAction
+} from '../../src/components/ViolationSquares';
+
+import {ViolationSquare} from '../../src/components/ViolationSquare';
+
+const violations = [{violationclass: 'A'}, {violationclass: 'B'}, {violationclass: 'A'}, {violationclass: 'C'}];
+
 
 describe('<ViolationSquares />', ()=>{
   // 2 As, 1 B, 1C, no Is
-  let violations = [{violationclass: 'A'}, {violationclass: 'B'}, {violationclass: 'A'}, {violationclass: 'C'}];
+  describe('wrapDispatchWithAction', ()=>{
+    it('inserts violationClick into dispatch func', ()=>{
+      let dispatch = sinon.spy();
+      let wrappedDispatch = wrapDispatchWithAction(dispatch);
+      expect(wrappedDispatch).to.be.a('Function');
+
+      wrappedDispatch('A');
+
+      expect(dispatch.args[0][0]).to.eql({
+        type: 'VIOLATION_CLICK',
+        violationClassFilter: 'A'
+      });
+    });
+  });
   
   describe('squareProps()',()=>{
     
@@ -16,9 +37,9 @@ describe('<ViolationSquares />', ()=>{
 
   });
 
-  describe('<Violations />', ()=>{
+  describe('<ViolationSquares />', ()=>{
     
-    it('renders 4 ViolationSquare Elements', ()=>{
+   it('renders 4 ViolationSquare Elements', ()=>{
       let component = shallow(<ViolationSquares violations={violations} />);
       expect(component.find(ViolationSquare)).to.have.length(4);
     });
@@ -34,6 +55,22 @@ describe('<ViolationSquares />', ()=>{
       expect(component.props().children[3].props.violationclass).to.eql('A');
       expect(component.props().children[3].props.count).to.eql('2');
     });
+
+        
+    it.skip('injects dispatch of violationClick action to child <ViolationSquare />', ()=>{
+      let spy = sinon.spy();
+      let component = shallow(<ViolationSquares violations={violations} dispatch={spy}/>);
+      //expect(component.find(ViolationSquare).at(1).props().handleClick).to.eql(spy);
+      expect(spy.calledOnce).to.eql(true);
+      // expect(dispatch.args[0][0]).to.eql({
+      //   type: 'VIOLATION_CLICK',
+      //   violationClassFilter: ''
+      // });
+    }); 
   });
 
+  
+
 });
+
+

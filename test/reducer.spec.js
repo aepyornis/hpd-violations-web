@@ -6,7 +6,7 @@ import {
 
 import {violationClick as clickAction} from '../src/actions/violationClick';
 
-describe.only('Reducer', ()=>{
+describe('Reducer', ()=>{
 
   describe('addOrRemove()', ()=>{
     it('adds item to array',() => expect(addOrRemove([1,2], 3)).to.eql([1,2,3]));

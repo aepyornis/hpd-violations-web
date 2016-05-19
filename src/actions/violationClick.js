@@ -9,5 +9,3 @@ export const violationClick = (violationclass) => {
     violationClassFilter: violationclass
   };
 };
-
-

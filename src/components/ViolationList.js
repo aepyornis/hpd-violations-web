@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-
-
-export const ViolationItem = ({violationclass, currentstatus}) =>{
-  return <li><b>{violationclass}</b> - {currentstatus}</li>;  
+export const ViolationItem = ({novdescription, currentstatus}) =>{
+  return <li>({currentstatus}) - {novdescription}</li>;  
 };
 
 /**
@@ -18,3 +16,8 @@ export const ViolationList = ({violations}) =>(
     </ul>
   </div>
 );
+
+
+ViolationList.propTypes = {
+  violations: PropTypes.array
+};

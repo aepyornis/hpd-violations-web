@@ -15,16 +15,15 @@ const defaultState = {
 };
 
 
-
 export const addOrRemove = (arr ,item) => arr.includes(item) ? 
   reject(arr, (i) => i === item) :
   arr.concat(item);
 
 
 /**
- * updates violationClassFilterArray
- * @param {} state
- * @param {} action
+ * updates violationClassFilter Array
+ * @param {object} state
+ * @param {object} action
  */
 export const violationClick = (state, action) => Object.assign({},state, 
     {violationClassFilter: addOrRemove(state.violationClassFilter, action.violationClassFilter)});

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {violationSquare} from '../style';
+import { violationClick } from '../actions/violationClick';
 
 
 const colorPicker = (violationclass) => {
@@ -25,10 +26,11 @@ const colorPickerStyle = (violationclass) => ({backgroundColor: colorPicker(viol
  * @param {String|Int} count
  * @param {Function} onClick 
  */
-export const ViolationSquare = ({violationclass, count, onClick}) => {
+export const ViolationSquare = ({violationclass, count, dispatch}) => {
   const style = Object.assign({},violationSquare.container,colorPickerStyle(violationclass));
-   return (
-       <div style={style} onClick={ () => onClick(violationclass) }>
+  const wrappedClick = () => dispatch(violationClick(violationclass));
+  return (
+       <div className='violation-quare' style={style} onClick={wrappedClick}>
        <h3 style={violationSquare.h3}>{violationclass}</h3>
        <h3 style={violationSquare.h3}>{count}</h3>
   </div>
@@ -38,7 +40,7 @@ export const ViolationSquare = ({violationclass, count, onClick}) => {
 ViolationSquare.propTypes = {
   violationclass: PropTypes.string,
   count: PropTypes.string,
-  onClick: PropTypes.func
+  dispatch: PropTypes.func
 };
 
 

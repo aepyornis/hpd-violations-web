@@ -1,4 +1,5 @@
 import {ViolationSquare} from '../../src/components/ViolationSquare';
+import { violationClick } from '../../src/actions/violationClick';
 
 describe('<ViolationSquare />', ()=>{
   it('contains two <h3>', ()=>{
@@ -8,12 +9,12 @@ describe('<ViolationSquare />', ()=>{
     expect(c.find('h3').at(1).text()).to.eql('3');
   });
 
-  it('Calls onClick function with  violationclass as arg', ()=>{
+  it('Calls dispatch function with violationclick action as arg', ()=>{
     let spy = sinon.spy();
-    let c = shallow(<ViolationSquare violationclass="B" count="3" onClick={spy} />);
+    let c = shallow(<ViolationSquare violationclass="B" count="3" dispatch={spy} />);
     c.simulate('click');
     expect(spy.calledOnce).to.be.true;
-    expect(spy.args[0][0]).to.eql('B');
+    expect(spy.args[0][0]).to.eql(violationClick('B'));
   });
 
 });
