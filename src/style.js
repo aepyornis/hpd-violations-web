@@ -84,3 +84,36 @@ export const openClosedToggle = {
     margin: '0 Auto'
   }
 };
+
+export const infoModal = {
+    overlay : {
+      position          : 'fixed',
+      top               : 0,
+      left              : 0,
+      right             : 0,
+      bottom            : 0,
+      backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+    },
+    content : {
+      top: '30%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)'
+    },
+  center: {
+    textAlign: 'center'
+  },
+  p: {
+    margin: '3px',
+    lineHeight: 'normal'
+  },
+  closeButton: {
+    textAlign:'center',
+    display: 'block',
+    margin: '0 auto',
+    marginTop: '3em',
+    width: '2em'
+    
+  }
+};

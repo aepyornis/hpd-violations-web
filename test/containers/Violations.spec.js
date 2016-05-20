@@ -55,5 +55,6 @@ describe('<Violations>', ()=>{
       expect(filterViolations('OPEN', ['C'], violations)).to.have.length(0);
     });
   });
+
 });
 
