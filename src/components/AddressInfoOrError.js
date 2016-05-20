@@ -107,5 +107,4 @@ AddressInfoOrError.propTypes = {
 };
 AddressInfoOrError.defaultProps = () => ({address: {}});
 
-
 export default connect(mapStateToProps)(AddressInfoOrError);

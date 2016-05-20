@@ -1,13 +1,13 @@
-import {OpenClosedToggle, classer} from '../../src/components/OpenClosedToggle';
+import {OpenAllToggle, classer} from '../../src/components/OpenAllToggle';
 
 
 const spyAndToggle = (status = 'ALL') => {
   let dispatch = sinon.spy();
-  let toggle = shallow(<OpenClosedToggle toggleStatus={status} dispatch={dispatch} />);
+  let toggle = shallow(<OpenAllToggle toggleStatus={status} dispatch={dispatch} />);
   return [dispatch, toggle];
 };
 
-describe('<OpenClosedToggle />', ()=>{
+describe('<OpenAllToggle />', ()=>{
   describe('classer()', ()=>{
     it('generates correct class', ()=>{
       expect(classer('ALL','ALL')).to.eql('btn-small btn');
@@ -16,7 +16,7 @@ describe('<OpenClosedToggle />', ()=>{
       expect(classer('OPEN', 'OPEN')).to.eql('btn-small btn');
     });
   });
-  it('Dispatchs ALL when clicked', ()=>{
+  it('Dispatches ALL when clicked', ()=>{
     let [dispatch, toggle] = spyAndToggle();
     toggle.childAt(0).simulate('click');
     expect(dispatch.calledOnce).to.be.true;
@@ -26,7 +26,7 @@ describe('<OpenClosedToggle />', ()=>{
     });
   });
 
-  it('Dispatchs OPEN when clicked', ()=>{
+  it('Dispatches OPEN when clicked', ()=>{
     let [dispatch, toggle] = spyAndToggle();
     toggle.childAt(1).simulate('click');
     expect(dispatch.calledOnce).to.be.true;
