@@ -9,8 +9,7 @@ const NavBar = () => (
       </a>
     </div>
     <a href="#" style={navbar.text}>HPD Violations</a>
-    
   </div>
-)
+);
 
 export default NavBar;

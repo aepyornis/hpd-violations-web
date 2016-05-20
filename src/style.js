@@ -39,12 +39,14 @@ export const violationSquare = {
     display: 'inline-block',
     marginLeft: '3em',
     marginTop: '1em',
+    marginBottom: '1em',
     width: '80px',
     height: '100px',
     lineHeight: '80px',
     outlineWidth: '1px',
     outlineColor: 'black',
-    outlineStyle: 'dashed'
+    outlineStyle: 'dashed',
+    cursor: 'pointer'
   },
   h3: {
     color: 'black'
@@ -62,3 +64,22 @@ export const violations = {
   }
 };
 
+export const violationList = {
+  container:{
+    maxWidth: '300px'
+  }, 
+  item: {
+    fontSize: '0.8em',
+    lineHeight: 'normal',
+    textAlign: 'left'
+  },
+  violclass: {
+    color: '#be5d2b',
+    fontWeight: 'bold' 
+  }
+};
+
+
+export const violationClickMessage = {
+  color: 'black'
+};
