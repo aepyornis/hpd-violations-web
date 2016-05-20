@@ -31,14 +31,16 @@ export const filterViolations = (toggleStatus, selectedClasses, violations) => {
  * @param {Array} violations
  * @returns {React.Component} 
  */
-export const Violations = ({violations, visible, filteredViolations, showClickMessage}) => {
+export const Violations = (
+    {violations, visible, filteredViolations, showClickMessage, dispatch}
+) => {
   if (visible) {
     return (<div className="row" style={style.container}>
       <ViolationCount count={toString(violations.length)} />
       <OpenAllToggle />
       <ViolationSquares violations={violations}/>
       { (showClickMessage) ? <ViolationClickMessage /> : <span></span> }
-      <ViolationList violations={filteredViolations} />
+      <ViolationList violations={filteredViolations} dispatch={dispatch}/>
       </div>);
   } else {
     return <span></span>;
@@ -49,7 +51,8 @@ Violations.propTypes = {
   violations: PropTypes.array,
   visible: PropTypes.bool,
   filteredViolations: PropTypes.array,
-  showClickMessage: PropTypes.bool
+  showClickMessage: PropTypes.bool,
+  dispatch: PropTypes.func
 };
 
 export const mapStateToProps = state => {

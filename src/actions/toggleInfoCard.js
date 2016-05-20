@@ -1,12 +1,12 @@
 /**
  * Open or Close Info Card
- * @param {string} - 'OPEN' or 'CLOSE'
+ * @param {string|int} - i
  * @returns {Object} 
  */
-export const toggleInfoCard = (status) => {
+export const toggleInfoCard = (indexOrClose) => {
   return {
     type: 'TOGGLE_INFO_CARD',
-    infoCardVisible: (status === 'OPEN') ? true : false
+    infoCard: indexOrClose
   };
 };
 

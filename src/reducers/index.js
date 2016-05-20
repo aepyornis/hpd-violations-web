@@ -42,6 +42,8 @@ export const reducer = (state = initState, action) => {
     return violationClick(state, action);
   case 'TOGGLE_OPEN_CLOSED':
     return Object.assign({}, state, {toggleStatus: action.toggleStatus});
+  case 'TOGGLE_INFO_CARD':
+    return Object.assign({}, state, {infoCardVisible: action.infoCardVisible});
   default:
     return state;
   };
