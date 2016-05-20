@@ -1,28 +1,25 @@
-export const navbar = {};
-
-navbar.container = {
-  display: 'block',
-  width: '100%',
-  minHeight: '50px',
-  lineHeight: '50px',
-  backgroundColor: '#b3e2cd'
-};
-
-navbar.infoMenuButton = {
-  display: 'inline'
-};
-
-navbar.icon = {
-  marginLeft: '10px',
-  maringRight: '30x',
-  width: '20px',
-  height: '20px'
-};
-
-navbar.text = {
-  color: 'black', 
-  fontSize: '18px',
-  paddingLeft: '20px'
+export const navbar = {
+  container: {
+    display: 'block',
+    width: '100%',
+    minHeight: '50px',
+    lineHeight: '50px',
+    backgroundColor: '#b3e2cd'
+  },
+  infoMenuButton: {
+    display: 'inline'
+  },
+  icon: {
+    marginLeft: '10px',
+    maringRight: '30x',
+    width: '20px',
+    height: '20px'
+  },
+  text: {
+    color: 'black', 
+    fontSize: '18px',
+    paddingLeft: '20px'
+  }
 };
 
 export const addressSearch = {
@@ -53,7 +50,6 @@ export const violationSquare = {
   }
 };
 
-
 export const addressInfo = {
   textAlign: 'center'
 };
@@ -79,7 +75,12 @@ export const violationList = {
   }
 };
 
-
 export const violationClickMessage = {
   color: 'black'
+};
+
+export const openClosedToggle = {
+  container: {
+    margin: '0 Auto'
+  }
 };

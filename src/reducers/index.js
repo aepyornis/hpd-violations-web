@@ -1,6 +1,8 @@
 //import { combineReducers } from 'redux';
 import {reject} from 'lodash';
 
+const initState = require('../../init_state1.js');
+
 const defaultState = {
   violations: {
     status: 'INIT'
@@ -11,7 +13,8 @@ const defaultState = {
       address: {}
     }
   },
-  violationClassFilter: []
+  violationClassFilter: [],
+  toggleStatus: 'ALL'
 };
 
 
@@ -29,7 +32,7 @@ export const violationClick = (state, action) => Object.assign({},state,
     {violationClassFilter: addOrRemove(state.violationClassFilter, action.violationClassFilter)});
 
 
-export const reducer = (state = defaultState, action) => {
+export const reducer = (state = initState, action) => {
   switch (action.type) {
   case 'VIOLATION':
     return Object.assign({}, state, {violations: action});
@@ -37,6 +40,8 @@ export const reducer = (state = defaultState, action) => {
     return Object.assign({}, state, {geoclient: action});
   case 'VIOLATION_CLICK':
     return violationClick(state, action);
+  case 'TOGGLE_OPEN_CLOSED':
+    return Object.assign({}, state, {toggleStatus: action.toggleStatus});
   default:
     return state;
   };

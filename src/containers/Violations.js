@@ -4,6 +4,8 @@ import ViolationSquares from '../components/ViolationSquares';
 import ViolationCount from '../components/ViolationCount';
 import {ViolationList} from '../components/ViolationList';
 import ViolationClickMessage from '../components/ViolationClickMessage';
+import OpenClosedToggle from '../components/OpenClosedToggle';
+
 import {isUndefined, toString, filter} from 'lodash';
 import {violations as style} from '../style';
 
@@ -28,6 +30,7 @@ export const Violations = ({violations, visible, filteredViolations, showClickMe
   if (visible) {
     return <div className="row" style={style.container}>
       <ViolationCount count={toString(violations.length)} />
+      <OpenClosedToggle />
       <ViolationSquares violations={violations}/>
       { (showClickMessage) ? <ViolationClickMessage /> : <span></span> }
       <ViolationList violations={filteredViolations} />
