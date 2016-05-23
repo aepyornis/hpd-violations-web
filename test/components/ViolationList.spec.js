@@ -25,10 +25,10 @@ const violationList = () => {
       let [c, dispatch] = violationList();
       c.find('ul').childAt(0).shallow().simulate('click');
       expect(dispatch.calledOnce).to.eql(true);
-      expect(dispatch.args[0][0]).to.eql({type:'TOGGLE_INFO_CARD', infoCard: 0});
+      expect(dispatch.args[0][0]).to.eql({type:'TOGGLE_INFO_CARD', infoCard: {currentstatus: 'OPEN', violationclass: 'A'}});
       c.find('ul').childAt(1).shallow().simulate('click');
       expect(dispatch.calledTwice).to.eql(true);
-      expect(dispatch.args[1][0]).to.eql({type:'TOGGLE_INFO_CARD', infoCard: 1});
+      expect(dispatch.args[1][0]).to.eql({type:'TOGGLE_INFO_CARD', infoCard: {currentstatus: 'CLOSED', violationclass: 'B'}});
     });
     
   });

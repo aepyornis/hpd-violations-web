@@ -14,7 +14,8 @@ const defaultState = {
     }
   },
   violationClassFilter: [],
-  toggleStatus: 'ALL'
+  toggleStatus: 'ALL',
+  infoCard: 'CLOSE'
 };
 
 
@@ -43,7 +44,7 @@ export const reducer = (state = initState, action) => {
   case 'TOGGLE_OPEN_CLOSED':
     return Object.assign({}, state, {toggleStatus: action.toggleStatus});
   case 'TOGGLE_INFO_CARD':
-    return Object.assign({}, state, {infoCardVisible: action.infoCardVisible});
+    return Object.assign({}, state, {infoCard: action.infoCard});
   default:
     return state;
   };

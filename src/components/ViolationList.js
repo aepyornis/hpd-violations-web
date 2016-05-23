@@ -20,7 +20,7 @@ export const ViolationItem = ({novdescription, currentstatus, violationclass, cl
 export const ViolationList = ({violations, dispatch}) =>(
   <div style={style.container}>
     <ul>
-    {violations.map( (v,i) => <ViolationItem {...v} key={i} clickAction={()=> dispatch(toggleInfoCard(i)) }/>)}
+    {violations.map( (v,i) => <ViolationItem {...v} key={i} clickAction={()=> dispatch(toggleInfoCard(v)) }/>)}
     </ul>
   </div>
 );

@@ -19,42 +19,60 @@ export const CloseButton = ({closeEvent}) => (
 
 CloseButton.propTypes = {
   closeEvent: PropTypes.func.isRequired
-}
+};
 
-export const InfoItem = ({title, info}) => <p style={infoModal.p}>{title}: {info}</p>;
+export const InfoItem = ({title, info}) => <p style={infoModal.p}><strong>{title}:</strong> {info}</p>;
+
+
+/**
+ * Content of the info card modal
+ * @param {Object} violation
+ */
+export const InfoCardContent = ({violation}) => (
+    <div>
+      <h4 style={infoModal.header}>Violation Class: <strong>{violation.violationclass}</strong></h4>
+      <h5 style={infoModal.header}>Inspected on: {formatDate(violation.inspectiondate)}</h5>
+      <hr />
+      <InfoItem title="Current Status" info={violation.currentstatus} />
+      <InfoItem title="Last updated"  info={formatDate(violation.currentstatusdate)} />
+      <InfoItem title="Original Certify By Date" info={formatDate(violation.originalcorrectbydate)} />
+      <InfoItem title="Description" info={capitalize(violation.novdescription)} />
+    </div>
+);
 
 /**
  * InfoCard Display
  * @param {Object} Violation
  * @param {Boolean} Open
+ * @param {Function} Store Dispatch
  */
 export const InfoCard = ({violation, open, dispatch}) => (
   <Modal 
     isOpen={open}
     style={infoModal}
   >
-    <h4 style={infoModal.center}>Violation Class: {violation.violationclass}</h4>
-    <InfoItem title="Current Status" info={violation.currentstatus} />
-    <InfoItem title="Last updated"  info={formatDate(violation.currentstatusdate)} />
-    <InfoItem title="Inspection Date"  info={formatDate(violation.inspectiondate)} />
-    <InfoItem title="Original Certify By Date" info={formatDate(violation.originalcorrectbydate)} />
-    <InfoItem title="Description" info={capitalize(violation.novdescription)} />
-    
+    { open ? <InfoCardContent violation={violation} /> : <div></div> }
     <CloseButton closeEvent={()=>dispatch(toggleInfoCard('CLOSE'))}/>
   </Modal>
 );
 
-
 InfoCard.propTypes = {
   violation: PropTypes.object,
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  dispatch: PropTypes.func
 };
 
-const mapStateToProps = (state) => {
+InfoCard.defaultProps = {
+  violation: {},
+  open: false
+};
+
+const mapStateToProps = state => {
   return {
-    open: state.infoCardVisible,
-    violation: state.violations.result[0]
+    open: (state.infoCard !== 'CLOSE'),
+    violation: (state.infoCard !== 'CLOSE') ? state.infoCard : {}
   };
 };
 
+ 
 export default connect(mapStateToProps)(InfoCard);

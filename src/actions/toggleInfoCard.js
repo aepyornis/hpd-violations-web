@@ -1,12 +1,12 @@
 /**
  * Open or Close Info Card
- * @param {string|int} - i
+ * @param {string|object} -  'CLOSE' or {violationObject}
  * @returns {Object} 
  */
-export const toggleInfoCard = (indexOrClose) => {
+export const toggleInfoCard = (violationOrClose) => {
   return {
     type: 'TOGGLE_INFO_CARD',
-    infoCard: indexOrClose
+    infoCard: violationOrClose
   };
 };
 
