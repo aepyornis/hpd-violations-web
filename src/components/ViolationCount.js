@@ -6,7 +6,7 @@ import React from 'react';
  * @returns {React.Component}
  */
 export const ViolationCount = ({count}) => (
-    <h6><b>Total Violations: </b>{count}</h6>
+    <h3>Number of Violations:  <span className="f2">{count}</span></h3>
 );
 
 ViolationCount.propTypes = {

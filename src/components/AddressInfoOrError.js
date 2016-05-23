@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { isUndefined } from 'lodash';
-import {addressInfo} from '../style';
+import { isUndefined, lowerCase, upperFirst, words} from 'lodash';
 
 export const orEmptyString = (x) => isUndefined(x) ? '' : x;
+const titleize = s => words(s).map(lowerCase).map(upperFirst).join(' ');
 
 /**
  * Creates an Address string from fields: houseNumber, firstStreetNameNormalized, zipCode
@@ -17,9 +17,9 @@ export const formatAddress = a => `${a.houseNumber} ${a.firstStreetNameNormalize
  */
 export const AddressInfo = ({address}) => {
   return (
-     <div>
-        <p><strong>{formatAddress(address)}</strong></p>
-        <p><strong>BBL: </strong>{address.bbl}</p>
+     <div >
+      <p className="f5 tc">{formatAddress(address)}</p>
+      <p className="f6 tc"><strong>BBL: </strong>{address.bbl}</p>
       </div>
   );
 };
@@ -27,7 +27,7 @@ export const AddressInfo = ({address}) => {
 /**
  * Show when status is IN_PROGRESS / FAILED
  */
-export const SimpleMessage  = ({text}) => <h5>{text}</h5>;
+export const SimpleMessage  = ({text}) => <p className="f4">{text}</p>;
 
 /**
  * Show when status is DONE_NOT_FOUND
@@ -60,7 +60,7 @@ export const infoContentSwitcher = (status, address) => {
   case 'DONE_NOT_FOUND':
     return  <NotFoundMessage address={address} />;
   case 'FAILED':
-    return <SimpleMessage text="Geoclient appear to be down..." />;
+    return <SimpleMessage text="Geoclient appears to be down..." />;
   default:
     return <SimpleMessage text="Something went wrong!" />;
   }
@@ -88,15 +88,14 @@ const mapStateToProps = (state) => {
  * @param {Boolean} error
  */
 export const AddressInfoOrError = ({status, address, error}) => {
-  let divClasses = `col-4 alert ${ (error) ? 'alert-error' : ''}`;
+  let bc = (error) ? 'red-back' : 'bg-light-silver';
   return (
-    <div className="row">
-      <div className="col-4"></div>
-      <div className={divClasses} id="info-container" style={addressInfo}>
+      <div className="mv100 tc mt2 pt2">
+      <div className={"pa2 mw6 dib rounded " + bc } 
+          id="info-container">
          {infoContentSwitcher(status, address)}
-       </div>
-       <div className="col-4"></div>
-    </div>
+      </div>
+      </div>
   );
 };
 

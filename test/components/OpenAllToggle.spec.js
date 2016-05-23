@@ -8,12 +8,12 @@ const spyAndToggle = (status = 'ALL') => {
 };
 
 describe('<OpenAllToggle />', ()=>{
-  describe('classer()', ()=>{
+  describe.skip('classer()', ()=>{
     it('generates correct class', ()=>{
-      expect(classer('ALL','ALL')).to.eql('btn-small btn');
-      expect(classer('OPEN', 'ALL')).to.eql('btn-small btn-outline');
-      expect(classer('ALL', 'OPEN')).to.eql('btn-small btn-outline');
-      expect(classer('OPEN', 'OPEN')).to.eql('btn-small btn');
+      expect(classer('ALL','ALL')).to.eql('btn-on');
+      expect(classer('OPEN', 'ALL')).to.eql('btn-off');
+      expect(classer('ALL', 'OPEN')).to.eql('btn-off');
+      expect(classer('OPEN', 'OPEN')).to.eql('btn-on');
     });
   });
   it('Dispatches ALL when clicked', ()=>{
@@ -38,11 +38,11 @@ describe('<OpenAllToggle />', ()=>{
 
   it('Displays correct layout', ()=>{
     var [dispatch, toggle] = spyAndToggle();
-    expect(toggle.childAt(0).hasClass('btn-outline')).to.eql(false);
-    expect(toggle.childAt(1).hasClass('btn-outline')).to.eql(true);
+    expect(toggle.childAt(0).hasClass('btn-off')).to.eql(false);
+    expect(toggle.childAt(1).hasClass('btn-off')).to.eql(true);
     var [dispatch, toggle] = spyAndToggle('OPEN');
-    expect(toggle.childAt(0).hasClass('btn-outline')).to.eql(true);
-    expect(toggle.childAt(1).hasClass('btn-outline')).to.eql(false);
+    expect(toggle.childAt(0).hasClass('btn-off')).to.eql(true);
+    expect(toggle.childAt(1).hasClass('btn-off')).to.eql(false);
   });
 
 });

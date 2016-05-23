@@ -4,7 +4,6 @@ import NavBar from '../components/NavBar';
 import AddressInfoOrError from '../components/AddressInfoOrError';
 import ViolationStatus from '../components/ViolationStatus';
 import Violations from './Violations';
-import Info from './Info';
 
 /**
  * App container

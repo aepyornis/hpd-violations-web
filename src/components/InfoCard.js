@@ -9,12 +9,10 @@ import toggleInfoCard from '../actions/toggleInfoCard';
 export const formatDate = (d) =>  d.slice(0,10);
 
 export const CloseButton = ({closeEvent}) => (
-  <div className="btn btn-small" 
-       style={infoModal.closeButton}
-       onClick={()=> closeEvent()}>
-    <img src="open-iconic-master/svg/x.svg" alt="x">
-    </img>
-  </div>
+   <div className="mv100 tc mt1">
+     <button className="h2 w3 mt4"
+             onClick={()=> closeEvent()}>close</button>
+   </div>
 );
 
 CloseButton.propTypes = {
@@ -30,8 +28,8 @@ export const InfoItem = ({title, info}) => <p style={infoModal.p}><strong>{title
  */
 export const InfoCardContent = ({violation}) => (
     <div>
-      <h4 style={infoModal.header}>Violation Class: <strong>{violation.violationclass}</strong></h4>
-      <h5 style={infoModal.header}>Inspected on: {formatDate(violation.inspectiondate)}</h5>
+      <h2 style={infoModal.header}>Violation Class: <strong>{violation.violationclass}</strong></h2>
+      <h2 style={infoModal.header}>Inspected on: {formatDate(violation.inspectiondate)}</h2>
       <hr />
       <InfoItem title="Current Status" info={violation.currentstatus} />
       <InfoItem title="Last updated"  info={formatDate(violation.currentstatusdate)} />
@@ -76,3 +74,6 @@ const mapStateToProps = state => {
 
  
 export default connect(mapStateToProps)(InfoCard);
+
+//<img src="open-iconic-master/svg/x.svg" alt="x">
+//</img>

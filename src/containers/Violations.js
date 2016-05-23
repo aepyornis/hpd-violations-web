@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import { toString } from 'lodash';
 import ViolationSquares from '../components/ViolationSquares';
 import ViolationCount from '../components/ViolationCount';
-import {ViolationList} from '../components/ViolationList';
+import { ViolationList } from '../components/ViolationList';
 import ViolationClickMessage from '../components/ViolationClickMessage';
 import OpenAllToggle from '../components/OpenAllToggle';
 import InfoCard from '../components/InfoCard';
-
-import {violations as style} from '../style';
 import { openAllFilter, filterViolations} from '../util/filterViolations';
 
 /**
- * Violations display component <ViolationList violations={}/>
+ * Violations display component
  * @param {Array} violations
+ * @param {Array} filteredViolations
+ * @param {Boolean} showClickMessage
+ * @param {function} dispatch
  * @returns {React.Component} 
  */
 export const Violations = ({
@@ -21,20 +22,13 @@ export const Violations = ({
 }) => {
   if (visible) {
     return (
-      <div className="row" style={style.container}>
-
-      <ViolationCount count={toString(violations.length)} />
-
-      <OpenAllToggle />
-
-      <ViolationSquares violations={violations}/>
-
-      { (showClickMessage) ? <ViolationClickMessage /> : <span></span> }
-
-      <ViolationList violations={filteredViolations} dispatch={dispatch}/>
-
-      <InfoCard />
-        
+      <div className="mv100 tc" >
+        <ViolationCount count={toString(violations.length)} />
+        <OpenAllToggle />
+        <ViolationSquares violations={violations}/>
+        { (showClickMessage) ? <ViolationClickMessage /> : <span></span> }
+        <ViolationList violations={filteredViolations} dispatch={dispatch}/>
+        <InfoCard />
       </div>);
   } else {
     return <span></span>;

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { searchAddress, forgotToSelectBoro } from '../actions/searchAddress';
 import { violationsAction } from '../actions/getViolations';
-import { addressSearch } from '../style';
+
 
 /**
  * Dispatches Actions when Button is clicked.
@@ -18,6 +18,12 @@ export const onButtonClick = (dispatch, address) => {
   }
 };
     
+/**
+ * Address Search Component containing: 
+ * House Number input,Street Name input, and Borough Select
+ * @param {function} dispatch
+ * @returns {React.Component} 
+ */
 export const AddressSearch = ({ dispatch}) => {
   const defaultVal = {value: ''};
   let houseNumber = defaultVal;
@@ -25,17 +31,17 @@ export const AddressSearch = ({ dispatch}) => {
   let boro = defaultVal;
   
   return (
-      <div style={addressSearch.container}>
-      <input id="houseNumberInput" 
+      <div className="tc mw100">
+      <input id="houseNumberInput"
+             placeholder="House number..."
              ref={node => houseNumber = node} 
-             className="form-input" />
+             className="mw4 f6" />
         <input ref={node => street = node}  
-               className="form-input" />
+               placeholder="Street name..."
+               className="ml2 mr2 mw5 f6" />
           
         <select ref={node => boro = node} 
-            className="form-select" 
-            style={addressSearch.select} >
-          
+            className="mr2 f6">
             <option value='X'>Borough:</option>
             <option value="Manhattan">Manhattan</option>
             <option value="Bronx">Bronx</option>
@@ -44,8 +50,7 @@ export const AddressSearch = ({ dispatch}) => {
             <option value="Staten Island">Staten Island</option>
           </select>
           
-        <button className="btn-small" 
-                onClick={() => {
+        <button onClick={() => {
                   const address = {
                     houseNumber: houseNumber.value,
                     street: street.value,

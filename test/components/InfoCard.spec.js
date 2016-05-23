@@ -45,12 +45,12 @@ describe('InfoCard', ()=>{
   describe('<CloseButton />', ()=>{
     it('contain img tag', ()=>{
       let button = shallow(<CloseButton closeEvent={()=>{}}/>);
-      expect(button.find('img')).to.have.length(1);
+      expect(button.find('button')).to.have.length(1);
     });
     it('calls closeEvent when clicked', ()=>{
       let spy = sinon.spy();
       let button = shallow(<CloseButton closeEvent={()=> spy()} />);
-      button.simulate('click');
+      button.find('button').simulate('click');
       expect(spy.calledOnce).to.eql(true);
     });
 
@@ -73,10 +73,8 @@ describe('InfoCard', ()=>{
       expect(c.find(InfoCardContent)).to.have.length(0);
     });
     describe('<InfoCardContent />', ()=>{
-      it('renders h4', ()=> expect(infoCardCont().find('h4')).to.have.length(1));
-      it('renders h5', ()=> expect(infoCardCont().find('h4')).to.have.length(1));
+      it('renders 2 h2', ()=> expect(infoCardCont().find('h2')).to.have.length(2));
       it('renders 4 infoItems', ()=> expect(infoCardCont().find(InfoItem)).to.have.length(4));
-      it('renders h4', ()=> expect(infoCardCont().find('h4')).to.have.length(1));
     });
   });
 });

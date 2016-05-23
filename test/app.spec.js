@@ -1,8 +1,8 @@
 import App from '../src/containers/App';
 import AddressSearch from '../src/components/AddressSearch';
-import Info from '../src/containers/Info.js';
 
-describe('<App/>', () => {
+
+describe.skip('<App/>', () => {
   let app;
   before(() => app = shallow(<App/>));
   

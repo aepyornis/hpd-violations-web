@@ -115,8 +115,7 @@ describe('components/AddressInfoOrError', () => {
   describe('<AddressInfoOrError />', ()=>{
     it('contains 3 columns & one row and one AddressInfo', ()=>{
       let x = shallow(<AddressInfoOrError status={'DONE_FOUND'} address={{}} />);
-      expect(x.find('.col-4')).to.have.length(3);
-      expect(x.find('.row')).to.have.length(1);
+      expect(x.find('#info-container')).to.have.length(1);
       expect(x.find(AddressInfo)).to.have.length(1);
     });
     it('contains SimpleMessage if status = failed', ()=>{

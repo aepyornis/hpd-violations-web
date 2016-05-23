@@ -1,12 +1,15 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {openClosedToggle as style} from '../style';
 import {toggleOpenClosed} from '../actions/toggleOpenClosed';
 
-
-
-export const classer = (toggleStatus, buttonIdentity) => (toggleStatus === buttonIdentity) ? 
-  'btn-small btn' : 'btn-small btn-outline';
+export const classer = (toggleStatus, buttonIdentity) => {
+  const defaultClass = 'dib w3 ma2 rounded v-mid';
+  if (toggleStatus === buttonIdentity){
+    return defaultClass + ' btn-on';
+  } else {
+    return defaultClass + ' btn-off';
+   }
+};
 
 /**
  * Toggle Component. 
@@ -15,9 +18,9 @@ export const classer = (toggleStatus, buttonIdentity) => (toggleStatus === butto
  * @returns {Object} 
  */
 export const OpenAllToggle = ({dispatch, toggleStatus}) => (
-    <div style={style.container} >
+    <div className="mw100 mb3 toggleBox cursor-pointer">
       <div className={classer(toggleStatus,'ALL')}
-           onClick={() => dispatch(toggleOpenClosed('ALL'))}>ALL</div>
+            onClick={() => dispatch(toggleOpenClosed('ALL'))}>ALL</div>
       <div className={classer(toggleStatus,'OPEN')}
            onClick={() => dispatch(toggleOpenClosed('OPEN'))}>OPEN</div>
     </div>

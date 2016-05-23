@@ -34,5 +34,3 @@ ViolationSquares.propTypes = {
 };
 
 export default connect()(ViolationSquares);
-
-//
