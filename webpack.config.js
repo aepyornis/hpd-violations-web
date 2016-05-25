@@ -12,7 +12,7 @@ module.exports = {
     port: 8888
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({})
+//    new webpack.optimize.UglifyJsPlugin({})
   ],
   module: {
     loaders: [

@@ -27,6 +27,7 @@ select, button {
 }
 
 .btn-on {
+  background-color: rgba(227,26,26, 0.5);
 }
 
 .btn-off:hover  {
