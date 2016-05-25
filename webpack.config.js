@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -12,6 +13,10 @@ module.exports = {
     port: 8888
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      title: 'HPD Violations',
+      template: 'src/index.ejs'
+    })
 //    new webpack.optimize.UglifyJsPlugin({})
   ],
   module: {
@@ -23,6 +28,11 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      { 
+        test: /\.css$/, 
+        loader: "style!css",
+        exclude: /node_modules/
       }
     ]
   }
