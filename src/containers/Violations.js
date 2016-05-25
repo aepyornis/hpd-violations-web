@@ -11,21 +11,22 @@ import { openAllFilter, filterViolations} from '../util/filterViolations';
 
 /**
  * Violations display component
- * @param {Array} violations
- * @param {Array} filteredViolations
- * @param {Boolean} showClickMessage
+ * @param {Array} violations - List of all or open violations
+ * @param {Array} filteredViolations - List of vioaltions filtered to those toggled
+ * @param {Boolean} showClickMessage -
+ * @param {Array} violationClassFilter  - which violations classes are toggled
  * @param {function} dispatch
  * @returns {React.Component} 
  */
 export const Violations = ({
-    violations, visible, filteredViolations, showClickMessage, dispatch
+    violations, visible, filteredViolations, showClickMessage, violationClassFilter, dispatch
 }) => {
   if (visible) {
     return (
       <div className="mv100 tc" >
         <ViolationCount count={toString(violations.length)} />
         <OpenAllToggle />
-        <ViolationSquares violations={violations}/>
+        <ViolationSquares violations={violations} violationClassFilter={violationClassFilter} />
         { (showClickMessage) ? <ViolationClickMessage /> : <span></span> }
         <ViolationList violations={filteredViolations} dispatch={dispatch}/>
         <InfoCard />
@@ -40,6 +41,7 @@ Violations.propTypes = {
   visible: PropTypes.bool,
   filteredViolations: PropTypes.array,
   showClickMessage: PropTypes.bool,
+  violationClassFilter: PropTypes.array,
   dispatch: PropTypes.func
 };
 
@@ -47,6 +49,7 @@ export const mapStateToProps = state => {
   return {
     visible: (state.violations.status === 'VIOLATION_FOUND'),
     showClickMessage: (state.violationClassFilter.length === 0),
+    violationClassFilter: state.violationClassFilter,
     violations: openAllFilter(state.toggleStatus, state.violations.result),
     filteredViolations: filterViolations(state.toggleStatus, state.violationClassFilter, state.violations.result)
   };
