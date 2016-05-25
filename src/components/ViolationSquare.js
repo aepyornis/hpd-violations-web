@@ -20,16 +20,24 @@ const colorPicker = (violationclass) => {
 
 const colorPickerStyle = violationclass => ({backgroundColor: colorPicker(violationclass)});
 
+export const classer = (violationclass, violationClassFilter) => {
+  const baseClass = "dib h4 w4 cursor-pointer ba b--dashed bw1 b--dark-gray ma3 violation-square ";
+  return violationClassFilter.includes(violationclass) ? 
+    (baseClass + 'violation-class-selected') : baseClass;
+};
+
+
+
 /**
  * Display of violation class and count
  * @param {String} violationclass
  * @param {String|Int} count
  * @param {Function} onClick 
  */
-export const ViolationSquare = ({violationclass, count, dispatch}) => {
+export const ViolationSquare = ({violationclass, count, dispatch, violationClassFilter}) => {
    const wrappedClick = () => dispatch(violationClick(violationclass));
   return (
-       <div className="dib h4 w4 cursor-pointer ba b--dashed bw1 b--dark-gray ma3 violation-square" 
+      <div className={classer(violationclass, violationClassFilter)} 
              style={colorPickerStyle(violationclass)} 
              onClick={wrappedClick}>
       <h1 className="mb2 mt1">{violationclass}</h1>
@@ -41,9 +49,12 @@ export const ViolationSquare = ({violationclass, count, dispatch}) => {
 
 ViolationSquare.propTypes = {
   violationclass: PropTypes.string,
+  violationClassFilter: PropTypes.array,
   count: PropTypes.string,
   dispatch: PropTypes.func
 };
 
-
+ViolationSquare.defaultProps = {
+  violationClassFilter: []
+};
 

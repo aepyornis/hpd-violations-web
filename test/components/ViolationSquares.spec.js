@@ -38,12 +38,20 @@ describe('<ViolationSquares />', ()=>{
   });
 
   describe('<ViolationSquares />', ()=>{
-    
+
    it('renders 4 ViolationSquare Elements', ()=>{
       let component = shallow(<ViolationSquares violations={violations} />);
       expect(component.find(ViolationSquare)).to.have.length(4);
     });
-    
+
+    it('passes violationClassFilter to squares', ()=>{
+      let component = shallow(<ViolationSquares violations={violations} violationClassFilter={['A']}/>);
+      component.find(ViolationSquare).forEach(sq => {
+        expect(sq.props().violationClassFilter).to.eql(['A']);
+      });
+
+    });
+
     it('renders count correctly', ()=>{
       let component = shallow(<ViolationSquares violations={violations} />);
       expect(component.props().children[0].props.violationclass).to.eql('C');
@@ -56,7 +64,6 @@ describe('<ViolationSquares />', ()=>{
       expect(component.props().children[3].props.count).to.eql('2');
     });
 
-        
     it.skip('injects dispatch of violationClick action to child <ViolationSquare />', ()=>{
       let spy = sinon.spy();
       let component = shallow(<ViolationSquares violations={violations} dispatch={spy}/>);

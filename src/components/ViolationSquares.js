@@ -22,15 +22,17 @@ export const squareProps = (violations) => ['C', 'I', 'B', 'A']
  * @param {Array} violations
  * @returns {React.Component} 
  */
-export const ViolationSquares = ({violations, dispatch}) => (
+export const ViolationSquares = ({violations, violationClassFilter, dispatch}) => (
   <div>
-    {squareProps(violations).map((info, i) =><ViolationSquare {...info} key={i} dispatch={dispatch}/>)}
+    {squareProps(violations).map((info, i) =><ViolationSquare {...info} violationClassFilter={violationClassFilter} key={i} dispatch={dispatch}/>)}
   </div> 
 );
 
 ViolationSquares.propTypes = {
   violations: PropTypes.array.isRequired,
+  violationClassFilter: PropTypes.array,
   dispatch: PropTypes.func
 };
+
 
 export default connect()(ViolationSquares);

@@ -47,6 +47,10 @@ select, button {
   box-shadow: 8px 8px 6px rgba(227,26,26, 0.5);
 }
 
+.violation-class-selected {
+  box-shadow: 8px 8px 6px rgba(227,26,26, 0.5);
+}
+
 .cent {
   margin: 0 auto;
 }
@@ -56,3 +60,5 @@ select, button {
 .violation-li:hover {
   border: 2px dashed  rgba(227,26,26, 0.5);
 }
+
+
