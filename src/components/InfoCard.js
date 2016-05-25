@@ -6,7 +6,14 @@ import {capitalize} from 'lodash';
 import toggleInfoCard from '../actions/toggleInfoCard';
 
 // string -> string
-export const formatDate = (d) =>  d.slice(0,10);
+export const formatDate = (d) =>  {
+  try {
+    return d.slice(0,10);
+  } 
+  catch (e) {
+    return '';
+  }
+};
 
 export const CloseButton = ({closeEvent}) => (
    <div className="mv100 tc mt1">
