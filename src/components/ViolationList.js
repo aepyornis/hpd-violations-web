@@ -6,8 +6,8 @@ export const ViolationItem = ({novdescription, currentstatus, violationclass, cl
     return (
         <li className="tl pb2 cursor-pointer mw7 truncate violation-li pt1 pl1"
             onClick={()=> clickAction()}>
-        <b><span className="red">{violationclass}: </span>
-        ({currentstatus})</b> - {capitalize(novdescription)}</li>);  
+        <span className="red">{violationclass}: </span>
+        <span className="current-stauts i">{currentstatus}</span> - {capitalize(novdescription)}</li>);  
 };
 
 /**
@@ -16,8 +16,8 @@ export const ViolationItem = ({novdescription, currentstatus, violationclass, cl
  * @returns {React.Component}
  */
 export const ViolationList = ({violations, dispatch}) =>(
-    <div className="db cent">
-    <ul className="list cent mw7">
+    <div className="db">
+    <ul className="list mw7 cent">
     {violations.map( (v,i) => <ViolationItem {...v} key={i} clickAction={()=> dispatch(toggleInfoCard(v)) }/>)}     
     </ul>
   </div>

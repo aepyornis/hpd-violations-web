@@ -2,8 +2,14 @@ import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {toggleOpenClosed} from '../actions/toggleOpenClosed';
 
+/**
+ *  Generates the className string for OpenAllToggle 
+ * @param {string} toggleStatus
+ * @param {string} buttonIdentity
+ * @returns {string} 
+ */
 export const classer = (toggleStatus, buttonIdentity) => {
-  const defaultClass = 'dib w3 ma2 rounded v-mid';
+  const defaultClass = 'dib w3 ma2 rounded v-mid ba b--silver';
   if (toggleStatus === buttonIdentity){
     return defaultClass + ' btn-on';
   } else {
@@ -12,7 +18,7 @@ export const classer = (toggleStatus, buttonIdentity) => {
 };
 
 /**
- * Toggle Component. 
+ * Toggles Between Open and Closed Violations.
  * @param {function} - dispatch
  * @param {string} toggleStatus - 'ALL' or 'OPEN'
  * @returns {Object} 

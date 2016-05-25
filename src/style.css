@@ -1,5 +1,18 @@
 /* HPD-VIOLATIONS STYLE */
 
+.cursor-pointer {
+  cursor:pointer;
+}
+
+.cent {
+  margin: 0 auto;
+}
+
+.red {
+  color: rgba(227,26,26, 1);
+  font-weight: bold;
+}
+
 select, button {
   padding: 2px;
   border: none;
@@ -9,27 +22,37 @@ select, button {
 }
 
 .rounded {
-  border-radius: 20px;
-}
-
-.blue-back {
-  background-color: rgba(31,120,180,0.5);
-}
-
-.red-back {
-  background-color: rgba(227,26,26, 0.5);
+  border-radius: 20px; 
 }
 
 .toggleBox {
   height: 2em; 
   line-height: 2em; 
-  cursor:pointer;  
 }
 
 .btn-on {
   background-color: rgba(227,26,26, 0.5);
 }
 
+.btn-off  {
+  background-color: rgba(31,120,180,0.1)
+}
+
+
 .btn-off:hover  {
-  background-color: rgba(31,120,180,0.1);
+  background-color: rgba(227,26,26, 0.1);
+}
+
+.violation-square:hover {
+  box-shadow: 8px 8px 6px rgba(227,26,26, 0.5);
+}
+
+.cent {
+  margin: 0 auto;
+}
+
+.current-status {}
+
+.violation-li:hover {
+  border: 2px dashed  rgba(227,26,26, 0.5);
 }
