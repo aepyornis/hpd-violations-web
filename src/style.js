@@ -25,3 +25,12 @@ export const infoModal = {
     lineHeight: 'normal'
   }
 };
+
+export const sidebarStyle = {
+  root: {
+    top: '4rem'
+    },
+    sidebar: {
+        backgroundColor: 'rgba(240,250,255,0.7)',
+    }
+};

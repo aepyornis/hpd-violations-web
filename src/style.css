@@ -35,7 +35,7 @@ select, button {
 }
 
 .btn-off  {
-  background-color: rgba(31,120,180,0.1)
+  background-color: rgba(31,120,180,0.1);
 }
 
 
@@ -60,5 +60,3 @@ select, button {
 .violation-li:hover {
   border: 2px dashed  rgba(227,26,26, 0.5);
 }
-
-
