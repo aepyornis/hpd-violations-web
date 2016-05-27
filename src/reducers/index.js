@@ -45,6 +45,10 @@ export const reducer = (state = initState, action) => {
     return Object.assign({}, state, {toggleStatus: action.toggleStatus});
   case 'TOGGLE_INFO_CARD':
     return Object.assign({}, state, {infoCard: action.infoCard});
+  case 'OPEN_SIDEBAR':
+    return Object.assign({}, state, {sidebarOpen: true});
+  case 'CLOSE_SIDEBAR':
+    return Object.assign({}, state, {sidebarOpen: false});
   default:
     return state;
   };
