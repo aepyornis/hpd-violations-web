@@ -1,7 +1,7 @@
-import {AddressSearch, onButtonClick} from '../src/components/AddressSearch';
-import reducer from '../src/reducers/index';
+import {AddressSearch, onButtonClick} from '../../src/components/AddressSearch';
+import reducer from '../../src/reducers/index';
 
-const actions = require('../src/actions/searchAddress');
+const actions = require('../../src/actions/searchAddress');
 
 describe('<AddressSearch>', () =>{
   let finalState = {

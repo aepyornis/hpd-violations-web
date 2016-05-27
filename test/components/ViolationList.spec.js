@@ -7,15 +7,15 @@ describe('ViolationList.js', ()=>{
   describe('<ViolationItem />', ()=>{
     it('renders <li> tag', ()=>{
       let component = shallow(<ViolationItem violationclass="B" currentstatus="open" />);
-      expect(component.text()).to.eql('B: (open) - ');
+      expect(component.text()).to.eql('B: open - ');
     });
-});
+  });
 
-const violationList = () => {
+  const violationList = () => {
     let dispatch = sinon.spy();
     let violations = [{violationclass:"A", currentstatus: "OPEN"},{violationclass: "B", currentstatus: "CLOSED"} ];
     return [shallow(<ViolationList violations={violations} dispatch={dispatch}/>), dispatch];
- };
+  };
 
 
   describe('<ViolationList />', ()=>{
@@ -33,6 +33,3 @@ const violationList = () => {
     
   });
 });
-
-
-

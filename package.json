@@ -7,7 +7,9 @@
     "start": "webpack-dev-server --content-base dist/",
     "build": "webpack",
     "test": "mocha --compilers js:babel-register --require ./test/test_helper.js  --recursive",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "cov": "istanbul cover _mocha -- --compilers js:babel-register --require ./test/test_helper.js  --recursive",
+    "cov-report": "firefox coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,8 @@
     "css-loader": "^0.23.1",
     "enzyme": "^2.3.0",
     "html-webpack-plugin": "^2.17.0",
-    "mocha": "^2.5.1",
+    "istanbul": "1.0.0-alpha.2",
+    "mocha": "^2.5.3",
     "react-addons-test-utils": "^15.1.0",
     "sinon": "^1.17.4",
     "style-loader": "^0.13.1",

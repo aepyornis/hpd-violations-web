@@ -15,7 +15,6 @@ export const violationsAction = (status, result = '') => {
   };
 };
 
-
 /**
  * Dispatches VIOLATION_NOT_FOUND if server returns object with 'error' field, otherwise it dispatches VIOLATION_FOUND
  * @param {function} dispatch

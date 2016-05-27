@@ -29,3 +29,4 @@ export const geoclientFetch = (houseNumber, street, boro) => {
 export const violationsFetch = (bbl, type = 'all') => {
   return get(`${violations.url}bbl/${bbl}/${type}`);
 };
+

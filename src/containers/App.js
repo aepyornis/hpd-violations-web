@@ -11,12 +11,10 @@ import Violations from './Violations';
 const App = () => (
   <div>
     <NavBar />
-    <div className="grid">
       <AddressSearch />
       <AddressInfoOrError />
       <ViolationStatus />
       <Violations />
-    </div>
   </div>
 );
 
