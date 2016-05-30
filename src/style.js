@@ -31,6 +31,7 @@ export const sidebarStyle = {
     top: '4rem'
     },
     sidebar: {
-        backgroundColor: 'rgba(255,250,255,0.8)'
+      backgroundColor: 'rgba(255,250,255,0.8)',
+      paddingLeft: '8px'
     }
 };

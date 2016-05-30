@@ -8,15 +8,17 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  devServer: {
-    inline: true,
-    port: 8888
-  },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new HtmlWebpackPlugin({
       title: 'HPD Violations',
       template: 'src/index.ejs'
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin({})
   ],
   module: {
     loaders: [

@@ -4,3 +4,4 @@ config.js
 coverage/
 mockup/
 init_state*
+upload.sh

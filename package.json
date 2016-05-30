@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --content-base dist/",
-    "build": "webpack",
+      "build": "webpack",
+      "prod": "webpack --progress --config webpack.production.js",
     "test": "mocha --compilers js:babel-register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm test -- --watch",
     "cov": "istanbul cover _mocha -- --compilers js:babel-register --require ./test/test_helper.js  --recursive",

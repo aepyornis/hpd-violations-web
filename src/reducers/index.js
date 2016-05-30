@@ -1,7 +1,7 @@
-//import { combineReducers } from 'redux';
 import {reject} from 'lodash';
 
-const initState = require('../../init_state1.js');
+// for testing:
+// const initState = require('../../init_state1.js');
 
 const defaultState = {
   violations: {
@@ -33,7 +33,7 @@ export const violationClick = (state, action) => Object.assign({},state,
     {violationClassFilter: addOrRemove(state.violationClassFilter, action.violationClassFilter)});
 
 
-export const reducer = (state = initState, action) => {
+export const reducer = (state = defaultState, action) => {
   switch (action.type) {
   case 'VIOLATION':
     return Object.assign({}, state, {violations: action});
