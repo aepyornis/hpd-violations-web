@@ -1,4 +1,4 @@
-import {reject} from 'lodash';
+import {reject, includes} from 'lodash';
 
 // for testing:
 // const initState = require('../../init_state1.js');
@@ -19,7 +19,7 @@ const defaultState = {
 };
 
 
-export const addOrRemove = (arr ,item) => arr.includes(item) ? 
+export const addOrRemove = (arr ,item) => includes(arr, item) ? 
   reject(arr, (i) => i === item) :
   arr.concat(item);
 

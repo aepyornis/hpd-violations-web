@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import { violationClick } from '../actions/violationClick';
+import {includes} from 'lodash';
 
 const rgba = (r,g,b) => `rgba(${r},${g},${b}, 0.7)`;
 
@@ -22,7 +23,7 @@ const colorPickerStyle = violationclass => ({backgroundColor: colorPicker(violat
 
 export const classer = (violationclass, violationClassFilter) => {
   const baseClass = "dib h4 w4 cursor-pointer ba b--dashed bw1 b--dark-gray ma3 violation-square ";
-  return violationClassFilter.includes(violationclass) ? 
+  return includes(violationClassFilter, violationclass) ? 
     (baseClass + 'violation-class-selected') : baseClass;
 };
 

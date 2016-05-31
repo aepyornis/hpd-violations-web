@@ -1,11 +1,11 @@
-import {filter} from 'lodash';
+import {filter, includes} from 'lodash';
 
 export const openAllFilter = (status, violations) =>{
   return (status === 'ALL') ? violations : filter(violations, v => v.currentstatusid !== 19);
 };
 
 export const violationClassFilter = (selectedClasses, violations) =>{
-  return filter(violations, v => selectedClasses.includes(v.violationclass));
+  return filter(violations, v => includes(selectedClasses, v.violationclass));
 };
 
 /**
