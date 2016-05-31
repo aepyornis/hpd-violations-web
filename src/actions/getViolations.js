@@ -7,7 +7,7 @@ import {has} from 'lodash';
  * @param {string|object} [result=''] 
  * @returns {object} 
  */
-export const violationsAction = (status, result = '') => {
+export const violationsAction = (status, result = []) => {
   return {
     type: "VIOLATION",
     status: status,

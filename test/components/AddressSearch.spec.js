@@ -45,7 +45,7 @@ describe('<AddressSearch>', () =>{
     it('dispatches ViolationsAction - INIT - if boro is selected', ()=>{
       let spy = sinon.spy();
       onButtonClick(spy, {boro:'Brooklyn'});
-      expect(spy.firstCall.args[0]).to.eql({type: 'VIOLATION', status: 'INIT', result: ""});
+      expect(spy.firstCall.args[0]).to.eql({type: 'VIOLATION', status: 'INIT', result: []});
       expect(spy.calledTwice).to.eql(true);
     });
     

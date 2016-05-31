@@ -76,12 +76,12 @@ describe('actions/getViolations', ()=>{
         spy = sinon.spy();
         calledThunk = getViolations('000')(spy);
       });
+      
       after( ()  => fetch.violationsFetch.restore() );
 
       it('dispatches VIOLATION IN PROGRESS', ()=>{
-        expect(spy.calledOnce).to.eql(true);
         expect(spy.firstCall.args[0])
-          .to.eql({ type: "VIOLATION", status: 'VIOLATION_IN_PROGRESS', result: ''});
+          .to.eql({ type: "VIOLATION", status: 'VIOLATION_IN_PROGRESS', result: []});
       });
       it('returns a promise', () => expect(calledThunk).to.be.a('promise'));
     });
