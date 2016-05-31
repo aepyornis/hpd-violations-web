@@ -1,14 +1,28 @@
-# hpd-violations-web
+# HPD Violations Web
 
-Install: ``` npm install ```
+A website to easily look up housing violations for any building in NYC.
+
+See it in action: [violations.nycchr.org](https://violations.nycchr.org/)
+
+There are two companion projects that this relies on:
+
+[hpd-violations](https://github.com/aepyornis/hpd-violations) - A postgres database built from HPD open data.
+
+[hpd-violations-server](https://github.com/aepyornis/hpd-violations-server) - A simple nodejs server serving JSON from the database
+
+### Develop:
+
+This is a react/redux app. 
+
+Install dependencies: ``` npm install ```
 
 Develop: ``` npm start ``` and ``` npm run test:watch ``` 
 
 Test: ``` npm test ```
 
-Build: ``` npm run build ``` and then host the dist/ folder.
+Build: ``` npm run prod ``` and then host the dist/ folder.
 
-### config.js:
+#### config.js:
 
 ``` javascript
 
@@ -26,13 +40,12 @@ module.exports = {
 
 ```
 
-
-### NYC GEOCLIENT proxy pass
+#### NYC GEOCLIENT proxy pass
 
 The [geoclient api](https://api.cityofnewyork.us/geoclient/v1/doc) does not accept [cross-origin requests](http://enable-cors.org/). I proxy pass the requests via ngnix using this configuration:
 
 ``` 
-location = /geoclient {
+location / {
                 proxy_pass https://api.cityofnewyork.us/geoclient/v1/address.json;
                 add_header 'Access-Control-Allow-Origin' '*';
                 add_header 'Access-Control-Allow-Credentials' 'true';
@@ -41,6 +54,7 @@ location = /geoclient {
         }
 
 ```
+
 
 
 
