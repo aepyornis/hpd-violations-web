@@ -5,7 +5,7 @@ import React from 'react';
  * @returns {React.Component}
  */
 export const ViolationClickMessage = () => (
-    <span>Click to find out more about the Building's Violation!</span>
+    <span>Click to find out more about the Building's Violations!</span>
 );
 
 export default ViolationClickMessage;
