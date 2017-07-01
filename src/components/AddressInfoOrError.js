@@ -15,12 +15,11 @@ export const formatAddress = a => `${a.houseNumber} ${a.firstStreetNameNormalize
 /**
  * Show when status is DONE_FOUND
  */
-export const AddressInfo = ({address}) => {
+export const BblInfo = ({bbl}) => {
   return (
-     <div >
-      <p className="f5 tc">{formatAddress(address)}</p>
-      <p className="f6 tc"><strong>BBL: </strong>{address.bbl}</p>
-      </div>
+     <div>
+      <p className="f6 tc"><strong>BBL: </strong>{bbl}</p>
+     </div>
   );
 };
 
@@ -35,8 +34,7 @@ export const SimpleMessage  = ({text}) => <p className="f4">{text}</p>;
 export const NotFoundMessage = ({address}) => {
   return (
     <div>
-      <SimpleMessage text="Could not find your address in the database:" />
-      <SimpleMessage text={orEmptyString(address.message)} />
+      
     </div>
   );
 };
@@ -44,10 +42,10 @@ export const NotFoundMessage = ({address}) => {
 /**
  * Returns React Element based on geoclient status
  * @param {String} status
- * @param {Object} address
+ * @param {Object} result
  * @returns {React.Component} 
  */
-export const infoContentSwitcher = (status, address) => {
+export const infoContentSwitcher = (status, result) => {
   switch(status) {
   case 'INIT':
     return <SimpleMessage text="Type in an address to search!" />;
@@ -56,9 +54,9 @@ export const infoContentSwitcher = (status, address) => {
   case 'IN_PROGRESS':
     return <SimpleMessage text="Searching the address..." />;
   case 'DONE_FOUND':
-    return <AddressInfo address={address} />;
+    return <BblInfo bbl={result.bbl} />;
   case 'DONE_NOT_FOUND':
-    return  <NotFoundMessage address={address} />;
+    return <SimpleMessage text="Could not find your address in the database:" />;
   case 'FAILED':
     return <SimpleMessage text="Geoclient appears to be down..." />;
   default:
@@ -76,7 +74,7 @@ const mapStateToProps = (state) => {
   return {
     status: state.geoclient.status,
     error: (s === 'DONE_NOT_FOUND' || s === 'FAILED' || s === 'FORGOT_TO_SELECT_BORO'),
-    address: state.geoclient.result.address
+    result: state.geoclient.result
   };
 };
 
@@ -84,26 +82,25 @@ const mapStateToProps = (state) => {
 /**
  * Displays Message or Information in box according the search address status.
  * @param {String} status
- * @param {Object} address
+ * @param {Object} result
  * @param {Boolean} error
  */
-export const AddressInfoOrError = ({status, address, error}) => {
+export const AddressInfoOrError = ({status, result, error}) => {
   let bc = (error) ? 'red-back' : 'bg-light-silver';
   return (
       <div className="mv100 tc mt2 pt2">
       <div className={"pa2 mw6 dib rounded " + bc } 
           id="info-container">
-         {infoContentSwitcher(status, address)}
+         {infoContentSwitcher(status, result)}
       </div>
       </div>
   );
 };
 
 AddressInfoOrError.propTypes = {
-  address: PropTypes.object,
+  result: PropTypes.object,
   status: PropTypes.string.isRequired,
   error: PropTypes.bool
 };
-AddressInfoOrError.defaultProps = () => ({address: {}});
 
 export default connect(mapStateToProps)(AddressInfoOrError);

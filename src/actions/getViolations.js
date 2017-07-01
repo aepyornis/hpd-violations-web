@@ -21,13 +21,12 @@ export const violationsAction = (status, result = []) => {
  * @param {object} res
  */
 export const handleResult = (dispatch, res) => {
-  if (has(res, 'error')) {
+  if (!Array.isArray(res) && res.length === 0) {
     dispatch(violationsAction('VIOLATION_NOT_FOUND', res));
   } else {
     dispatch(violationsAction('VIOLATION_FOUND', res));
   }
 };
-
 
 /**
  * Dispatches VIOLATION_NETWORK_ERROR
@@ -40,7 +39,7 @@ export const handleErr = (dispatch, err) => dispatch(violationsAction('VIOLATION
  * Get Violations 'Thunk'
  * 
  * @param {String} bbl
- * @returns {} 
+ * @returns {Promise} 
  */
 export const getViolations = (bbl) => {
   return (dispatch) => {

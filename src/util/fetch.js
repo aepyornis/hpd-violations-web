@@ -1,32 +1,32 @@
 import {get} from 'axios';
-import {geoclient, violations} from '../../config.js';
+//import {geoclient, violations} from '../../config.js';
 
 /**
- * Fetches address information from the NYC geoclient API
+ * Fetches BBL from geocode.nycdb.info
  * @param {str|number} houseNumber
  * @param {str} street
  * @param {str} boro
  * @returns {promise} 
  */
-export const geoclientFetch = (houseNumber, street, boro) => {
-  return get(geoclient.proxyurl, {
+export const geocodeFetch = (houseNumber, street, boro) => {
+  return get('https://geocode.nycdb.info', {
     params: {
-      app_id: geoclient.appid,
-      app_key: geoclient.appkey,
-      houseNumber: houseNumber,
+      house: houseNumber,
       street: street,
-      borough: boro
+      boro: boro
+    }
+  });
+}
+
+/**
+ * Fetches violations from api.nycdb.info
+ * @param {str} bbl
+ * @returns {promise} 
+ */
+export const violationsFetch = bbl => {
+  return get('https://api.nycdb.info/hpd_all_violations', {
+    params: {
+      bbl: `eq.${bbl}`
     }
   });
 };
-
-/**
- * Fetches violations from HPD-violations-server
- * @param {str} bbl
- * @param {str} [type='all'] - 'all' or 'open'
- * @returns {promise} 
- */
-export const violationsFetch = (bbl, type = 'all') => {
-  return get(`${violations.url}bbl/${bbl}/${type}`);
-};
-

@@ -1,4 +1,4 @@
-import {geoclientFetch} from '../util/fetch';
+import {geocodeFetch} from '../util/fetch';
 import {getViolations} from './getViolations';
 
 /**
@@ -34,9 +34,10 @@ export const forgotToSelectBoro = () => geoclient('FORGOT_TO_SELECT_BORO');
  * @param {object} result
  */
 export const handleResult = (dispatch, result) => {
-  if (hasBBL(result)) {
+  
+  if (result.status === 'OK') {
     dispatch(geoclient('DONE_FOUND', result));
-    dispatch(getViolations(result.address.bbl));
+    dispatch(getViolations(result.bbl));
   } else {
     dispatch(geoclient('DONE_NOT_FOUND', result));
   }
@@ -47,7 +48,10 @@ export const handleResult = (dispatch, result) => {
  * @param {function} dispatch
  * @param {object} err
  */
-export const handleErr = (dispatch, err) => dispatch(geoclient('FAILED', err));
+export const handleErr = (dispatch, err) => {
+  console.log(err);
+  dispatch(geoclient('FAILED', err));
+}
 
 /**
  * This is the "Thunk" for the address search.
@@ -58,7 +62,7 @@ export const handleErr = (dispatch, err) => dispatch(geoclient('FAILED', err));
 export const searchAddress = (address) => {
   return (dispatch) => {
     dispatch(geoclient('IN_PROGRESS'));
-    return geoclientFetch(address.houseNumber, address.street, address.boro)
+    return geocodeFetch(address.houseNumber, address.street, address.boro)
       .then(res => res.data )
       .then(res => handleResult(dispatch, res))
       .catch( err => handleErr(dispatch, err));

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --content-base dist/",
-      "build": "webpack",
-      "prod": "webpack --progress --config webpack.production.js",
+    "build": "webpack",
+    "prod": "webpack --progress --config webpack.production.js",
     "test": "mocha --compilers js:babel-register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm test -- --watch",
     "cov": "istanbul cover _mocha -- --compilers js:babel-register --require ./test/test_helper.js  --recursive",
@@ -42,7 +42,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "axios": "^0.13.1",
+    "axios": "^0.16.2",
     "lodash": "^4.15.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
