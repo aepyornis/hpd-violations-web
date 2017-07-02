@@ -21,9 +21,9 @@ describe('actions/getViolations', ()=>{
   });
   
   describe('handleResult()', ()=>{
-    it('Dispatches VIOLATION NOT FOUND', ()=>{
+    it('Dispatches VIOLATION NOT FOUND when array is 0', ()=>{
       let dispatchSpy = sinon.spy();
-      let res = {"error":0,"message":"No data returned from the query."};
+      let res = [];
       handleResult(dispatchSpy, res);
       expect(dispatchSpy.calledOnce).to.eql(true);
       expect(dispatchSpy.firstCall.args[0])
@@ -33,6 +33,19 @@ describe('actions/getViolations', ()=>{
           result: res
         });
     });
+
+    it('Dispatches VIOLATION NOT FOUND when something else is returned', ()=>{
+      let dispatchSpy = sinon.spy();
+      handleResult(dispatchSpy, null);
+      expect(dispatchSpy.calledOnce).to.eql(true);
+      expect(dispatchSpy.firstCall.args[0])
+        .to.eql({
+          type:"VIOLATION",
+          status:'VIOLATION_NOT_FOUND',
+          result: null
+        });
+    });
+    
     it('Dispatches VIOLATION_FOUND', ()=>{
       let dispatchSpy = sinon.spy();
       let res = [{violationid: 123}, {violationid: 124}];

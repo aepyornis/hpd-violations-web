@@ -1,5 +1,4 @@
 import {get} from 'axios';
-//import {geoclient, violations} from '../../config.js';
 
 /**
  * Fetches BBL from geocode.nycdb.info

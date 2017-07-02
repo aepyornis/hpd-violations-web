@@ -16,12 +16,13 @@ export const violationsAction = (status, result = []) => {
 };
 
 /**
- * Dispatches VIOLATION_NOT_FOUND if server returns object with 'error' field, otherwise it dispatches VIOLATION_FOUND
+ * Dispatches VIOLATION_NOT_FOUND if no violations are found.
+ * Otherwise it dispatches VIOLATIONS_FOUND
  * @param {function} dispatch
  * @param {object} res
  */
 export const handleResult = (dispatch, res) => {
-  if (!Array.isArray(res) && res.length === 0) {
+  if (!Array.isArray(res) || res.length === 0) {
     dispatch(violationsAction('VIOLATION_NOT_FOUND', res));
   } else {
     dispatch(violationsAction('VIOLATION_FOUND', res));

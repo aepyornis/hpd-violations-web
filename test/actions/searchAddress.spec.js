@@ -48,24 +48,24 @@ describe('actions/searchAddress.js', ()=> {
     
     it('dispatches DONE_FOUND ', ()=>{
       let dispatch = sinon.spy();
-      handleResult(dispatch, result);
+      handleResult(dispatch, { status: 'OK', bbl: '1234'});
       
       expect(dispatch.calledTwice).to.eql(true);
       expect(dispatch.firstCall.args[0])
         .to.eql({ type: 'GEOCLIENT',
                   status: 'DONE_FOUND',
-                  result: { address: { address: '123 Violation Road', bbl: '666' }}});
+                  result: { status: 'OK', bbl: '1234'}});
     });
 
     it('dispatches getViolations Thunk', ()=>{
       sinon.spy(violationAction, 'getViolations');
       let dispatch = sinon.spy();
       
-      handleResult(dispatch, result);
+      handleResult(dispatch, { status: 'OK', bbl: '1234'});
       
       expect(dispatch.calledTwice).to.eql(true);
       expect(violationAction.getViolations.calledOnce).to.eql(true);
-      expect(violationAction.getViolations.firstCall.args[0]).to.eql('666');
+      expect(violationAction.getViolations.firstCall.args[0]).to.eql('1234');
       
       violationAction.getViolations.restore();
     });
@@ -110,11 +110,11 @@ describe('actions/searchAddress.js', ()=> {
       let spy;
       let calledThunk;
       before( () => {
-        sinon.spy(fetch, 'geoclientFetch');
+        sinon.spy(fetch, 'geocodeFetch');
         spy = sinon.spy();
         calledThunk = searchAddress(address)(spy);
       });
-      after( ()  => fetch.geoclientFetch.restore() );
+      after( ()  => fetch.geocodeFetch.restore() );
 
       it('dispatches IN PROGRESS when called', ()=>{
         expect(spy.calledOnce).to.eql(true);
@@ -123,8 +123,8 @@ describe('actions/searchAddress.js', ()=> {
       });
 
       it('calls geoclientFetch with correct args', ()=>{
-        expect(fetch.geoclientFetch.calledOnce).to.eql(true);
-        expect(fetch.geoclientFetch.firstCall.args).to.eql(['123', 'Main St.', 'Queens']);
+        expect(fetch.geocodeFetch.calledOnce).to.eql(true);
+        expect(fetch.geocodeFetch.firstCall.args).to.eql(['123', 'Main St.', 'Queens']);
       });
 
       it('returns a promise', () => expect(calledThunk).to.be.a('promise'));

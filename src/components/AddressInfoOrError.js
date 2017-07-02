@@ -28,16 +28,6 @@ export const BblInfo = ({bbl}) => {
  */
 export const SimpleMessage  = ({text}) => <p className="f4">{text}</p>;
 
-/**
- * Show when status is DONE_NOT_FOUND
- */
-export const NotFoundMessage = ({address}) => {
-  return (
-    <div>
-      
-    </div>
-  );
-};
 
 /**
  * Returns React Element based on geoclient status
@@ -98,7 +88,7 @@ export const AddressInfoOrError = ({status, result, error}) => {
 };
 
 AddressInfoOrError.propTypes = {
-  result: PropTypes.object,
+  result: PropTypes.any,
   status: PropTypes.string.isRequired,
   error: PropTypes.bool
 };

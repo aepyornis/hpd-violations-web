@@ -1,11 +1,10 @@
 import {isElementOfType} from 'react-addons-test-utils';
 
 import {
-  AddressInfo, 
+  BblInfo, 
   SimpleMessage,
   formatAddress,
   orEmptyString,
-  NotFoundMessage,
   infoContentSwitcher,
   AddressInfoOrError
 } from '../../src/components/AddressInfoOrError';
@@ -31,23 +30,16 @@ describe('components/AddressInfoOrError', () => {
     
   });
   
-  describe('<AddressInfo />', ()=>{
-    let addressInfo;
-    let a = {
-      houseNumber: '12',
-      firstStreetNameNormalized: 'Main',
-      zipCode: '12345',
-      bbl: '123'
-    };
-    before(()=> {
-      addressInfo = shallow(<AddressInfo address={a} />);
-    });
+  describe('<BblInfo />', ()=>{
     
-    it('Contains two <p> tags', ()=> expect(addressInfo.find('p')).to.have.length(2));
+    it('Contains one <p> tags', ()=> {
+      let bblInfo = shallow(<BblInfo bbl="123" />);
+      expect(bblInfo.find('p')).to.have.length(1);
+    });
 
     it('contains correct text', ()=>{
-      expect(addressInfo.childAt(0).text()).to.eql('12 Main, 12345');
-      expect(addressInfo.childAt(1).text()).to.eql('BBL: 123');
+      let bblInfo = shallow(<BblInfo bbl="123" />);
+      expect(bblInfo.find('p').text()).to.eql('BBL: 123');
     });
     
   });
@@ -57,19 +49,6 @@ describe('components/AddressInfoOrError', () => {
       let simpleMessage = shallow(<SimpleMessage text="A Simple Message"/>);
       expect(simpleMessage.text()).to.eql('A Simple Message');
     });
-  });
-
-  describe('<NotFoundMessage />', ()=> {
-    let address = {'message': 'No Such Street'};
-    let notFound;
-    before(()=> notFound = shallow(<NotFoundMessage address={address} />));
-    
-    it('has two SimpleMessage elements with correct text', ()=>{
-      expect(notFound.find(SimpleMessage)).to.have.length(2);
-      expect(notFound.find(SimpleMessage).at(0).props().text).eql('Could not find your address in the database:');
-      expect(notFound.find(SimpleMessage).at(1).props().text).eql('No Such Street');
-    });
-    
   });
   
   describe('infoContentSwitcher()', ()=> {
@@ -95,13 +74,13 @@ describe('components/AddressInfoOrError', () => {
         .to.eql(true);
     });
     
-    it('returns <AddressInfo> for DONE_FOUND', ()=>{
-      expect(isElementOfType(infoContentSwitcher('DONE_FOUND', {}), AddressInfo))
+    it('returns <BblInfo> for DONE_FOUND', ()=>{
+      expect(isElementOfType(infoContentSwitcher('DONE_FOUND', {}), BblInfo))
         .to.eql(true);
     });
 
-    it('returns <NotFoundMessage> for DONE_NOT_FOUND', ()=>{
-      expect(isElementOfType(infoContentSwitcher('DONE_NOT_FOUND', {}), NotFoundMessage))
+    it('returns <SimpleMessage> for DONE_NOT_FOUND', ()=>{
+      expect(isElementOfType(infoContentSwitcher('DONE_NOT_FOUND', {}), SimpleMessage))
         .to.eql(true);
     });
     
@@ -114,12 +93,13 @@ describe('components/AddressInfoOrError', () => {
 
   describe('<AddressInfoOrError />', ()=>{
     it('contains 3 columns & one row and one AddressInfo', ()=>{
-      let x = shallow(<AddressInfoOrError status={'DONE_FOUND'} address={{}} />);
+      let x = shallow(<AddressInfoOrError status={'DONE_FOUND'} result={[]} />);
       expect(x.find('#info-container')).to.have.length(1);
-      expect(x.find(AddressInfo)).to.have.length(1);
+      expect(x.find(BblInfo)).to.have.length(1);
     });
-    it('contains SimpleMessage if status = failed', ()=>{
-      let x = shallow(<AddressInfoOrError status={'FAILED'} address={{}} />);
+    
+it('contains SimpleMessage if status = failed', ()=>{
+      let x = shallow(<AddressInfoOrError status={'FAILED'} />);
       expect(x.find(SimpleMessage)).to.have.length(1);
     });
   });
